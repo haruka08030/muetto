@@ -1,0 +1,37 @@
+# Git ignore for x-to-notion project
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnp/
+.pnp.js
+
+# Deno
+.deno_plugins/
+.deno_deps/
+.deno_bin/
+.deno/
+
+# Supabase
+supabase/.temp/
+supabase/config.toml # Contains local project ID and keys, should be regenerated or explicitly configured.
+
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Log files
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/*.local
+.vscode/settings.json # Often user-specific, but can be included if standard settings are shared.
