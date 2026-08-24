@@ -29,8 +29,8 @@ abstract final class AppRadius {
 /// テーマでは上書きせず、使う側でこの shape を渡す。
 abstract final class AppShapes {
   static RoundedRectangleBorder get card => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.card),
-      );
+    borderRadius: BorderRadius.circular(AppRadius.card),
+  );
 }
 
 abstract final class AppTheme {

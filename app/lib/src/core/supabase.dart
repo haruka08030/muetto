@@ -5,7 +5,7 @@ import 'env.dart';
 Future<void> initSupabase(Env config) async {
   await Supabase.initialize(
     url: config.supabaseUrl,
-    anonKey: config.supabaseAnonKey,
+    publishableKey: config.supabasePublishableKey,
   );
 }
 
