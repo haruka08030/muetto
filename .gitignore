@@ -1,37 +1,61 @@
-# Git ignore for x-to-notion project
-
-# Node.js
-node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-.pnp/
-.pnp.js
-
-# Deno
-.deno_plugins/
-.deno_deps/
-.deno_bin/
-.deno/
-
-# Supabase
-supabase/.temp/
-supabase/config.toml # Contains local project ID and keys, should be regenerated or explicitly configured.
-
-
-# Build artifacts
-dist/
+# ---- Flutter / Dart ----
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
 build/
-out/
+*.iml
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
 
-# Log files
-*.log
-logs/
+# 生成コード
+*.g.dart
+*.freezed.dart
+*.gr.dart
 
-# OS generated files
+# ---- iOS ----
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/flutter_export_environment.sh
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# ---- Android ----
+android/.gradle/
+android/local.properties
+android/key.properties
+*.jks
+*.keystore
+
+# ---- Supabase ----
+supabase/.temp/
+supabase/.branches/
+
+# ---- Python (tools/ingestion) ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 秘匿情報 ----
+.env
+.env.*
+!.env.example
+*.pem
+
+# ---- OS / エディタ ----
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
 
-# VS Code
-.vscode/*.local
-.vscode/settings.json # Often user-specific, but can be included if standard settings are shared.
+# ---- ログ・一時ファイル ----
+*.log
+logs/
+tmp/
