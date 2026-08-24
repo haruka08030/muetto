@@ -13,7 +13,10 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_PASSWORD: postgres
+          # このコンテナはジョブ内からしか到達できず、ジョブ終了時に破棄される。
+          # パスワードを置くとハードコードされた資格情報として検出されるため、
+          # 認証自体を無くす。本番の接続設定とは無関係。
+          POSTGRES_HOST_AUTH_METHOD: trust
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -25,7 +28,6 @@ jobs:
       PGHOST: localhost
       PGPORT: 5432
       PGUSER: postgres
-      PGPASSWORD: postgres
     steps:
       - uses: actions/checkout@v4
       - name: psql を入れる
