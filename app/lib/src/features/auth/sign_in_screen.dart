@@ -126,9 +126,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           ? null
                           : () => setState(() => _isSignUp = !_isSignUp),
                       child: Text(
-                        _isSignUp
-                            ? 'すでにアカウントをお持ちの方はこちら'
-                            : 'アカウントを新規作成する',
+                        _isSignUp ? 'すでにアカウントをお持ちの方はこちら' : 'アカウントを新規作成する',
                       ),
                     ),
                   ],

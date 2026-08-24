@@ -58,10 +58,10 @@ supabase db reset
 # 3. アプリを起動
 flutter run \
   --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=eyJhbGci...
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
-接続情報は `app/.env.example` を参照。クライアントに置いてよいのは anon key のみ。
+接続情報は `app/.env.example` を参照。クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
 
 ## 検証
 

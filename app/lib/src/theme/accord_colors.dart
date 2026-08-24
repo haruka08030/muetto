@@ -40,7 +40,9 @@ abstract final class AccordColors {
   /// ダークテーマでは彩度を保ったまま明度を上げる。
   static Color onDark(String accordSlug) {
     final base = HSLColor.fromColor(of(accordSlug));
-    return base.withLightness((base.lightness + 0.15).clamp(0.0, 1.0)).toColor();
+    return base
+        .withLightness((base.lightness + 0.15).clamp(0.0, 1.0))
+        .toColor();
   }
 
   static Iterable<String> get slugs => _light.keys;
