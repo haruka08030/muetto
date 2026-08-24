@@ -1,0 +1,498 @@
+slug,name_en,name_ja,family,family_ja,frequency,alias_count,needs_review
+musk,musk,ムスク,musk,ムスク,14161,13,false
+bergamot,bergamot,ベルガモット,citrus,シトラス,11903,6,false
+sandalwood,sandalwood,サンダルウッド,woody,ウッディ,11354,18,false
+jasmine,jasmine,ジャスミン,white_floral,ホワイトフローラル,10927,32,false
+rose,rose,ローズ,floral,フローラル,10833,61,false
+vanilla,vanilla,バニラ,gourmand,グルマン,10732,27,false
+amber,amber,アンバー,balsamic,バルサミック,10418,13,false
+patchouli,patchouli,パチュリ,woody,ウッディ,9810,9,false
+cedarwood,cedarwood,シダーウッド,woody,ウッディ,9456,15,false
+mandarin-orange,mandarin orange,マンダリンオレンジ,citrus,シトラス,6580,33,false
+vetiver,vetiver,ベチバー,woody,ウッディ,5961,17,false
+lemon,lemon,レモン,citrus,シトラス,5429,16,false
+iris,iris,イリス,floral,フローラル,4742,31,false
+tonka-bean,tonka bean,トンカビーン,gourmand,グルマン,4414,10,false
+oakmoss,oakmoss,オークモス,earthy,アーシー,4319,10,false
+lavender,lavender,ラベンダー,floral,フローラル,4029,12,false
+orange-blossom,orange blossom,オレンジブロッサム,white_floral,ホワイトフローラル,3905,18,false
+lily-of-the-valley,lily of the valley,スズラン,white_floral,ホワイトフローラル,3657,5,false
+grapefruit,grapefruit,グレープフルーツ,citrus,シトラス,3217,10,false
+ylang-ylang,ylang-ylang,イランイラン,white_floral,ホワイトフローラル,3151,8,false
+cardamom,cardamom,カルダモン,spicy,スパイシー,3105,8,false
+geranium,geranium,ゼラニウム,floral,フローラル,2983,10,false
+oud,oud,ウード,woody,ウッディ,2953,16,false
+violet,violet,バイオレット,floral,フローラル,2948,6,false
+pink-pepper,pink pepper,ピンクペッパー,spicy,スパイシー,2886,8,false
+frankincense,frankincense,フランキンセンス,balsamic,バルサミック,2756,16,false
+benzoin,benzoin,ベンゾイン,balsamic,バルサミック,2695,9,false
+leather,leather,レザー,leather,レザー,2688,8,false
+white-musk,white musk,ホワイトムスク,musk,ムスク,2656,0,false
+orange,orange,オレンジ,citrus,シトラス,2652,16,false
+peach,peach,桃,fruity,フルーティ,2466,5,false
+blackcurrant,blackcurrant,カシス,fruity,フルーティ,2331,8,false
+cinnamon,cinnamon,シナモン,spicy,スパイシー,2247,7,false
+neroli,neroli,ネロリ,citrus,シトラス,2127,11,false
+ambergris,ambergris,アンバーグリス,animalic,アニマリック,2098,4,false
+freesia,freesia,フリージア,white_floral,ホワイトフローラル,2011,3,false
+nutmeg,nutmeg,ナツメグ,spicy,スパイシー,1942,9,false
+saffron,saffron,サフラン,spicy,スパイシー,1940,11,false
+tuberose,tuberose,チュベローズ,white_floral,ホワイトフローラル,1793,9,false
+ginger,ginger,ジンジャー,spicy,スパイシー,1760,8,false
+labdanum,labdanum,ラブダナム,balsamic,バルサミック,1747,5,false
+apple,apple,林檎,fruity,フルーティ,1564,3,false
+raspberry,raspberry,ラズベリー,fruity,フルーティ,1551,3,false
+peony,peony,ピオニー,floral,フローラル,1511,1,false
+woody-notes,woody notes,ウッディノート,woody,ウッディ,1484,0,false
+heliotrope,heliotrope,ヘリオトロープ,floral,フローラル,1469,2,false
+coriander,coriander,コリアンダー,spicy,スパイシー,1456,5,false
+pear,pear,洋梨,fruity,フルーティ,1432,3,false
+clove,clove,クローブ,spicy,スパイシー,1415,5,false
+cashmeran,cashmeran,カシュメラン,woody,ウッディ,1384,2,false
+magnolia,magnolia,マグノリア,white_floral,ホワイトフローラル,1375,8,false
+black-pepper,black pepper,ブラックペッパー,spicy,スパイシー,1325,4,false
+carnation,carnation,カーネーション,floral,フローラル,1321,3,false
+pepper,pepper,ペッパー,spicy,スパイシー,1281,5,false
+gardenia,gardenia,ガーデニア,white_floral,ホワイトフローラル,1253,6,false
+aquatic,aquatic,アクアティック,aquatic,アクアティック,1241,3,false
+green-notes,green notes,グリーンノート,green,グリーン,1228,0,false
+violet-leaf,violet leaf,バイオレットリーフ,green,グリーン,1222,8,false
+gaiac-wood,gaiac wood,ガイアックウッド,woody,ウッディ,1170,8,false
+plum,plum,プラム,fruity,フルーティ,1142,3,false
+aldehydes,aldehydes,アルデヒド,aldehydic,アルデハイド,1141,0,false
+lime,lime,ライム,citrus,シトラス,1110,12,false
+mint,mint,ミント,herbal,ハーバル,1109,6,false
+pineapple,pineapple,パイナップル,fruity,フルーティ,1089,2,false
+rosemary,rosemary,ローズマリー,herbal,ハーバル,1076,5,false
+basil,basil,バジル,herbal,ハーバル,1070,3,false
+juniper,juniper,ジュニパー,woody,ウッディ,1051,5,false
+jasmine-sambac,jasmine sambac,サンバックジャスミン,white_floral,ホワイトフローラル,1049,6,false
+galbanum,galbanum,ガルバナム,green,グリーン,1025,4,false
+sage,sage,セージ,herbal,ハーバル,1001,5,false
+tobacco,tobacco,タバコ,tobacco,タバコ,979,10,false
+petitgrain,petitgrain,プチグレン,citrus,シトラス,963,6,false
+clary-sage,clary sage,クラリセージ,herbal,ハーバル,896,4,false
+lily,lily,リリー,white_floral,ホワイトフローラル,853,2,false
+rosewood,rosewood,ローズウッド,woody,ウッディ,848,3,false
+honey,honey,蜂蜜,gourmand,グルマン,848,6,false
+myrrh,myrrh,ミルラ,balsamic,バルサミック,846,8,false
+orchid,orchid,オーキッド,white_floral,ホワイトフローラル,831,2,false
+caramel,caramel,キャラメル,gourmand,グルマン,777,1,false
+osmanthus,osmanthus,金木犀,other,その他,744,9,false
+cypress,cypress,サイプレス,woody,ウッディ,736,6,false
+spices,spices,スパイス,spicy,スパイシー,725,5,false
+cyclamen,cyclamen,シクラメン,floral,フローラル,703,0,false
+ambroxan,ambroxan,アンブロキサン,synthetic,合成香料,688,2,false
+coconut,coconut,ココナッツ,fruity,フルーティ,683,4,false
+mimosa,mimosa,ミモザ,floral,フローラル,620,7,false
+elemi,elemi,エレミ,spicy,スパイシー,614,4,false
+hyacinth,hyacinth,ヒヤシンス,floral,フローラル,605,2,false
+lychee,lychee,ライチ,fruity,フルーティ,588,1,false
+may-rose,may rose,メイローズ,floral,フローラル,567,9,false
+lotus,lotus,ロータス,floral,フローラル,558,1,false
+bitter-orange,bitter orange,ビターオレンジ,citrus,シトラス,555,9,false
+civet,civet,シベット,animalic,アニマリック,550,4,false
+cistus,cistus,シスタス,other,その他,537,9,false
+apricot,apricot,アプリコット,fruity,フルーティ,537,1,false
+almond,almond,アーモンド,gourmand,グルマン,531,3,false
+narcissus,narcissus,ナルシス,floral,フローラル,528,5,false
+wormwood,wormwood,ニガヨモギ,herbal,ハーバル,520,7,false
+honeysuckle,honeysuckle,スイカズラ,white_floral,ホワイトフローラル,514,2,false
+thyme,thyme,タイム,herbal,ハーバル,503,3,false
+green-apple,green apple,青林檎,fruity,フルーティ,500,1,false
+melon,melon,メロン,fruity,フルーティ,495,1,false
+lilac,lilac,ライラック,other,その他,488,3,false
+praline,praliné,プラリネ,other,その他,480,0,false
+strawberry,strawberry,苺,fruity,フルーティ,470,4,false
+coffee,coffee,コーヒー,gourmand,グルマン,460,12,false
+anise,anise,アニス,spicy,スパイシー,435,1,false
+frangipani,frangipani,プルメリア,white_floral,ホワイトフローラル,434,5,false
+passion-fruit,passion fruit,パッションフルーツ,fruity,フルーティ,404,2,false
+suede,suede,スエード,leather,レザー,396,1,false
+tarragon,tarragon,タラゴン,herbal,ハーバル,396,0,false
+cocoa,cocoa,カカオ,gourmand,グルマン,390,4,false
+rhubarb,rhubarb,ルバーブ,fruity,フルーティ,385,2,false
+yuzu,yuzu,柚子,citrus,シトラス,367,2,false
+blackberry,blackberry,ブラックベリー,fruity,フルーティ,353,0,false
+cumin,cumin,クミン,spicy,スパイシー,351,3,false
+green-tea,green tea,緑茶,tea,ティー,351,3,false
+rum,rum,ラム,boozy,アルコーリック,340,5,false
+cypriol,cypriol,サイプリオール,woody,ウッディ,334,3,false
+star-anise,star anise,八角,spicy,スパイシー,332,1,false
+fig,fig,イチジク,fruity,フルーティ,326,2,false
+opoponax,opoponax,オポポナックス,balsamic,バルサミック,324,3,false
+verbena,verbena,バーベナ,herbal,ハーバル,323,5,false
+blood-orange,blood orange,ブラッドオレンジ,citrus,シトラス,318,3,false
+birch,birch,バーチ,woody,ウッディ,315,7,false
+water-lily,water lily,スイレン,floral,フローラル,306,0,false
+mango,mango,マンゴー,fruity,フルーティ,299,2,false
+davana,davana,ダバナ,other,その他,298,1,false
+tea,tea,紅茶,tea,ティー,297,6,false
+ozonic,ozonic,オゾンノート,aquatic,アクアティック,292,2,false
+castoreum,castoreum,カストリウム,animalic,アニマリック,292,3,false
+ambrette-seed,ambrette seed,アンブレットシード,other,その他,282,5,false
+watermelon,watermelon,スイカ,fruity,フルーティ,280,0,false
+pine,pine,パイン,woody,ウッディ,276,5,false
+tolu-balsam,tolu balsam,トルーバルサム,balsamic,バルサミック,276,4,false
+pimento,pimento,ピメント,spicy,スパイシー,264,2,false
+red-fruits,red fruits,赤い果実,fruity,フルーティ,264,0,false
+tiare,tiaré,ティアレ,other,その他,258,1,false
+tagetes,tagetes,マリーゴールド,other,その他,253,1,false
+cherry,cherry,チェリー,fruity,フルーティ,245,2,false
+white-cedar,white cedar,ホワイトシダー,woody,ウッディ,243,3,false
+angelica,angelica,アンジェリカ,herbal,ハーバル,242,4,false
+chamomile,chamomile,カモミール,floral,フローラル,240,2,false
+caraway,caraway,キャラウェイ,spicy,スパイシー,238,0,false
+fir-balsam,fir balsam,モミの樹脂,balsamic,バルサミック,234,5,false
+pomegranate,pomegranate,ザクロ,fruity,フルーティ,228,0,false
+peppermint,peppermint,ペパーミント,herbal,ハーバル,227,1,false
+citron,citron,シトロン,citrus,シトラス,226,4,false
+peru-balsam,peru balsam,ペルーバルサム,balsamic,バルサミック,223,1,false
+fig-leaf,fig leaf,フィグリーフ,green,グリーン,219,0,false
+ambrette,ambrette,アンブレット,musk,ムスク,217,0,false
+blackcurrant-bud,blackcurrant bud,カシスの芽,green,グリーン,216,5,false
+white-pepper,white pepper,ホワイトペッパー,spicy,スパイシー,210,2,false
+eucalyptus,eucalyptus,ユーカリ,herbal,ハーバル,209,3,false
+chocolate,chocolate,チョコレート,gourmand,グルマン,209,3,false
+sea-salt,sea salt,海塩,aquatic,アクアティック,205,3,false
+cherry-blossom,cherry blossom,桜,floral,フローラル,205,1,false
+immortelle,immortelle,イモーテル,floral,フローラル,198,5,false
+powdery-notes,powdery notes,パウダリーノート,powdery,パウダリー,197,0,false
+oak,oak,オーク,other,その他,193,10,false
+papyrus,papyrus,パピルス,woody,ウッディ,185,3,false
+amyris,amyris,アミリス,woody,ウッディ,185,2,false
+milk,milk,ミルク,gourmand,グルマン,184,0,false
+red-apple,red apple,赤林檎,fruity,フルーティ,184,0,false
+mate,maté,,tea,ティー,183,4,false
+mugwort,mugwort,ヨモギ,herbal,ハーバル,181,1,false
+nectarine,nectarine,ネクタリン,fruity,フルーティ,180,0,false
+licorice,licorice,リコリス,gourmand,グルマン,178,4,false
+berries,berries,ベリー,fruity,フルーティ,178,2,false
+coumarin,coumarin,クマリン,aromatic,アロマティック,175,0,false
+driftwood,driftwood,流木,woody,ウッディ,172,0,false
+teak,teak,チーク,woody,ウッディ,171,2,false
+grass,grass,草,green,グリーン,168,1,false
+sichuan-pepper,sichuan pepper,花椒,spicy,スパイシー,166,3,false
+blossoms,blossoms,花々,floral,フローラル,165,2,false
+white-rose,white rose,白薔薇,floral,フローラル,163,4,false
+black-tea,black tea,紅茶,tea,ティー,157,3,false
+bamboo,bamboo,竹,green,グリーン,156,2,false
+sugar,sugar,砂糖,gourmand,グルマン,154,0,false
+apple-blossom,apple blossom,林檎の花,floral,フローラル,153,0,false
+resins,resins,樹脂,balsamic,バルサミック,150,1,false
+fresh-notes,fresh notes,フレッシュノート,other,その他,150,0,false
+peach-blossom,peach blossom,桃の花,floral,フローラル,148,1,false
+chili,chili,チリ,spicy,スパイシー,147,2,false
+hawthorn,hawthorn,サンザシ,other,その他,146,0,false
+myrtle,myrtle,ミルテ,herbal,ハーバル,145,2,false
+laurel,laurel,ローレル,herbal,ハーバル,145,0,false
+red-currant,red currant,赤スグリ,fruity,フルーティ,143,0,false
+hay,hay,干し草,green,グリーン,143,2,false
+coconut-milk,coconut milk,ココナッツミルク,fruity,フルーティ,143,0,false
+spearmint,spearmint,スペアミント,herbal,ハーバル,142,0,false
+balsamic-notes,balsamic notes,バルサミックノート,balsamic,バルサミック,141,0,false
+beeswax,beeswax,蜜蝋,balsamic,バルサミック,139,4,false
+treemoss,treemoss,ツリーモス,earthy,アーシー,138,2,false
+nagarmotha,nagarmotha,ナガルモタ,woody,ウッディ,138,0,false
+aromatic-notes,aromatic notes,アロマティックノート,aromatic,アロマティック,137,0,false
+hibiscus,hibiscus,ハイビスカス,floral,フローラル,136,1,false
+ivy,ivy,アイビー,green,グリーン,136,0,false
+sweet-notes,sweet notes,スイートノート,other,その他,133,0,false
+mastic,mastic,マスティック,balsamic,バルサミック,130,4,false
+cedar-leaf,cedar leaf,シダーリーフ,woody,ウッディ,129,2,false
+fruits,fruits,果実,fruity,フルーティ,129,0,false
+hazelnut,hazelnut,ヘーゼルナッツ,gourmand,グルマン,128,0,false
+dry-woods,dry woods,ドライウッド,woody,ウッディ,128,0,false
+hedione,hedione,ヘディオン,synthetic,合成香料,127,0,false
+animalic-notes,animalic notes,アニマリックノート,animalic,アニマリック,126,0,false
+waterlily,waterlily,スイレン,floral,フローラル,125,0,false
+white-woods,white woods,ホワイトウッド,woody,ウッディ,124,0,false
+mahogany,mahogany,マホガニー,woody,ウッディ,124,2,false
+white-tea,white tea,白茶,tea,ティー,123,1,false
+blueberry,blueberry,ブルーベリー,fruity,フルーティ,122,0,false
+smoke,smoke,煙,tobacco,タバコ,121,0,true
+gurjun-balsam,gurjun balsam,ガジュツバルサム,balsamic,バルサミック,120,3,false
+bay-leaf,bay leaf,ローリエ,herbal,ハーバル,120,1,false
+kumquat,kumquat,金柑,citrus,シトラス,118,1,false
+pine-needle,pine needle,松葉,woody,ウッディ,117,1,false
+ebony,ebony,黒檀,woody,ウッディ,117,1,false
+lemon-zest,lemon zest,レモンの皮,citrus,シトラス,115,2,false
+fir,fir,モミ,woody,ウッディ,114,3,false
+cassia,cassia,カッシア,spicy,スパイシー,113,2,false
+currant,currant,スグリ,fruity,フルーティ,110,0,false
+white-lily,white lily,白百合,white_floral,ホワイトフローラル,106,0,false
+marshmallow,marshmallow,マシュマロ,gourmand,グルマン,106,0,false
+cucumber,cucumber,キュウリ,green,グリーン,105,0,false
+bitter-almond,bitter almond,ビターアーモンド,gourmand,グルマン,103,1,false
+coconut-water,coconut water,ココナッツウォーター,fruity,フルーティ,102,0,false
+dried-fruits,dried fruits,ドライフルーツ,fruity,フルーティ,102,0,false
+kiwi,kiwi,キウイ,fruity,フルーティ,102,0,false
+guava,guava,グアバ,fruity,フルーティ,102,0,false
+white-peony,white peony,白牡丹,floral,フローラル,101,0,false
+balsam,balsam,バルサム,balsamic,バルサミック,97,1,false
+carrot-seed,carrot seed,キャロットシード,spicy,スパイシー,97,1,false
+herbs,herbs,ハーブ,herbal,ハーバル,96,2,false
+dark-chocolate,dark chocolate,ダークチョコレート,gourmand,グルマン,96,1,false
+broom,broom,エニシダ,other,その他,96,5,false
+pink-peony,pink peony,ピンクピオニー,floral,フローラル,95,0,false
+fern,fern,シダ,green,グリーン,95,0,false
+coriander-seed,coriander seed,コリアンダーシード,spicy,スパイシー,94,2,false
+almond-blossom,almond blossom,アーモンドの花,floral,フローラル,93,1,false
+lemon-grass,lemon grass,レモングラス,citrus,シトラス,92,1,false
+seawater,seawater,海水,aquatic,アクアティック,92,0,false
+cream,cream,クリーム,gourmand,グルマン,92,1,false
+cranberry,cranberry,クランベリー,fruity,フルーティ,92,0,false
+papaya,papaya,パパイヤ,fruity,フルーティ,91,0,false
+quince,quince,マルメロ,fruity,フルーティ,91,0,false
+wisteria,wisteria,藤,floral,フローラル,89,1,false
+nashi-pear,nashi pear,梨,fruity,フルーティ,89,0,false
+champaca,champaca,チャンパカ,white_floral,ホワイトフローラル,89,2,false
+diesel,diesel,ディーゼル,other,その他,87,0,true
+marigold,marigold,マリーゴールド,floral,フローラル,87,4,false
+honey-pomelo,honey pomelo,文旦,gourmand,グルマン,86,0,false
+cotton-candy,cotton candy,綿菓子,gourmand,グルマン,85,0,false
+sweet-pea,sweet pea,スイートピー,other,その他,84,0,false
+leaves,leaves,葉,green,グリーン,83,0,false
+sea-breeze,sea breeze,潮風,aquatic,アクアティック,83,0,false
+linden-blossom,linden blossom,リンデンブロッサム,white_floral,ホワイトフローラル,79,3,false
+gasoline,gasoline,ガソリン,other,その他,78,0,true
+dust,dust,埃,other,その他,78,0,true
+charcoal,charcoal,炭,other,その他,77,0,true
+passion-flower,passion flower,パッションフラワー,floral,フローラル,75,2,false
+brown-sugar,brown sugar,黒糖,gourmand,グルマン,72,0,false
+date,date,デーツ,fruity,フルーティ,72,1,false
+akigalawood,akigalawood,アキガラウッド,woody,ウッディ,72,0,false
+tomato-leaf,tomato leaf,トマトリーフ,green,グリーン,71,0,false
+cognac,cognac,コニャック,boozy,アルコーリック,71,0,false
+birch-leaf,birch leaf,バーチリーフ,woody,ウッディ,70,0,false
+lemon-blossom,lemon blossom,レモンの花,white_floral,ホワイトフローラル,70,1,false
+marjoram,marjoram,マジョラム,herbal,ハーバル,70,0,false
+tar,tar,タール,tobacco,タバコ,70,0,true
+rubber,rubber,ゴム,other,その他,68,0,true
+tobacco-flower,tobacco flower,タバコの花,tobacco,タバコ,68,0,false
+fermented-almond,fermented almond,発酵アーモンド,gourmand,グルマン,67,0,false
+champagne,champagne,シャンパン,boozy,アルコーリック,66,0,false
+toffee,toffee,トフィー,gourmand,グルマン,66,0,false
+iso-e-super,iso e super,イソイースーパー,synthetic,合成香料,66,1,false
+brine,brine,潮,other,その他,65,0,true
+asphalt,asphalt,アスファルト,other,その他,65,0,true
+litsea-cubeba,litsea cubeba,リッツェアクベバ,aquatic,アクアティック,65,1,false
+mace,mace,メース,spicy,スパイシー,64,0,false
+starfruit,starfruit,スターフルーツ,fruity,フルーティ,63,0,false
+fennel,fennel,フェンネル,spicy,スパイシー,63,3,false
+oregano,oregano,オレガノ,herbal,ハーバル,61,1,false
+stone-pine,stone pine,イタリアカサマツ,woody,ウッディ,61,2,false
+whisky,whisky,ウイスキー,boozy,アルコーリック,60,1,false
+mandarin-orange-leaf,mandarin orange leaf,,citrus,シトラス,59,1,false
+vermouth,vermouth,ベルモット,other,その他,59,0,false
+clover,clover,クローバー,floral,フローラル,59,0,false
+black-leather,black leather,ブラックレザー,leather,レザー,59,0,false
+carrot,carrot,人参,other,その他,58,2,false
+cannabis,cannabis,カンナビス,other,その他,58,1,false
+deer-musk,deer musk,麝香,animalic,アニマリック,58,5,false
+copaiba,copaiba,コパイバ,balsamic,バルサミック,58,2,false
+camellia,camellia,椿,floral,フローラル,58,1,false
+pear-blossom,pear blossom,洋梨の花,white_floral,ホワイトフローラル,56,0,false
+grape,grape,葡萄,fruity,フルーティ,56,0,false
+lemon-leaf,lemon leaf,レモンリーフ,citrus,シトラス,55,1,false
+jasmine-tea,jasmine tea,ジャスミンティー,tea,ティー,53,0,false
+algae,algae,藻,aquatic,アクアティック,53,1,false
+blue-lotus,blue lotus,青蓮,other,その他,53,1,false
+ash,ash,灰,other,その他,52,0,true
+pistachio,pistachio,ピスタチオ,gourmand,グルマン,52,0,false
+sand,sand,砂,other,その他,51,0,false
+green-pepper,green pepper,グリーンペッパー,spicy,スパイシー,51,0,false
+palo-santo,palo santo,パロサント,other,その他,51,1,false
+orcanox,orcanox,オルカノックス,other,その他,49,0,false
+white-chocolate,white chocolate,ホワイトチョコレート,gourmand,グルマン,49,0,false
+white-freesia,white freesia,白フリージア,white_floral,ホワイトフローラル,49,0,false
+kelp,kelp,昆布,other,その他,48,2,false
+geranium-leaf,geranium leaf,ゼラニウムリーフ,floral,フローラル,48,1,false
+black-orchid,black orchid,ブラックオーキッド,white_floral,ホワイトフローラル,48,0,false
+almond-milk,almond milk,,gourmand,グルマン,48,0,false
+birch-tar,birch tar,バーチタール,leather,レザー,48,1,false
+candied-apple,candied apple,,fruity,フルーティ,48,0,false
+earthy,earthy,,earthy,アーシー,47,1,false
+new-caledonian-sandalwood,new caledonian sandalwood,,woody,ウッディ,47,0,false
+exotic-woods,exotic woods,,woody,ウッディ,47,0,false
+hinoki-cypress,hinoki cypress,,woody,ウッディ,46,0,false
+black-cherry,black cherry,,fruity,フルーティ,46,0,false
+mineral,mineral,,mineral,ミネラル,46,1,false
+cotton-flower,cotton flower,,floral,フローラル,45,0,false
+tea-rose,tea rose,,tea,ティー,45,1,false
+green-pear,green pear,,fruity,フルーティ,44,0,false
+white-ambergris,white ambergris,,balsamic,バルサミック,44,1,false
+red-thyme,red thyme,,herbal,ハーバル,44,1,false
+comorian-ylang-ylang,comorian ylang-ylang,,other,その他,44,0,false
+white-oud,white oud,,woody,ウッディ,43,0,false
+palmarosa,palmarosa,,other,その他,43,1,false
+dew-drop,dew drop,,other,その他,43,0,false
+crystal-musk,crystal musk,,musk,ムスク,42,0,false
+banana,banana,バナナ,fruity,フルーティ,42,0,false
+bell-pepper,bell pepper,,spicy,スパイシー,42,0,false
+hinoki-wood,hinoki wood,,woody,ウッディ,42,0,false
+pink-freesia,pink freesia,,white_floral,ホワイトフローラル,41,0,false
+peach-nectar,peach nectar,,fruity,フルーティ,41,0,false
+white-iris,white iris,,floral,フローラル,41,1,false
+reseda,reseda,,other,その他,41,0,false
+white-moss,white moss,,earthy,アーシー,41,0,false
+black-musk,black musk,,musk,ムスク,40,0,false
+sensual-skin,sensual skin,,animalic,アニマリック,40,1,false
+mock-orange,mock-orange,,citrus,シトラス,40,0,false
+rose-leaf,rose leaf,,floral,フローラル,40,0,false
+bamboo-leaf,bamboo leaf,,green,グリーン,40,0,false
+turmeric,turmeric,ターメリック,herbal,ハーバル,39,1,false
+acacia,acacia,アカシア,white_floral,ホワイトフローラル,39,1,false
+hyraceum,hyraceum,ハイラシウム,animalic,アニマリック,39,1,false
+fir-resin,fir resin,,balsamic,バルサミック,38,1,false
+black-rose,black rose,,floral,フローラル,38,0,false
+water-hyacinth,water hyacinth,,green,グリーン,38,0,false
+clearwood,clearwood,,woody,ウッディ,38,0,false
+white-thyme,white thyme,,herbal,ハーバル,37,1,false
+rice,rice,米,gourmand,グルマン,37,0,false
+watery-fruits,watery fruits,,fruity,フルーティ,37,0,false
+bitter-orange-blossom,bitter orange blossom,,white_floral,ホワイトフローラル,36,3,false
+white-orchid,white orchid,ホワイトオーキッド,white_floral,ホワイトフローラル,36,0,false
+soil,soil,土,earthy,アーシー,36,0,false
+star-jasmine,star jasmine,テイカカズラ,white_floral,ホワイトフローラル,35,1,false
+vodka,vodka,ウォッカ,boozy,アルコーリック,35,0,false
+lemon-petitgrain,lemon petitgrain,,citrus,シトラス,35,1,false
+metallic-notes,metallic notes,メタリックノート,mineral,ミネラル,35,0,false
+tropical-fruits,tropical fruits,トロピカルフルーツ,fruity,フルーティ,35,0,false
+spikenard,spikenard,,herbal,ハーバル,34,0,false
+honeydew-melon,honeydew melon,,fruity,フルーティ,34,0,false
+tulip,tulip,チューリップ,floral,フローラル,34,1,false
+datura,datura,ダチュラ,floral,フローラル,34,0,false
+olive-wood,olive wood,,woody,ウッディ,33,0,false
+key-lime,key lime,キーライム,citrus,シトラス,33,0,false
+cotton,cotton,コットン,green,グリーン,33,0,false
+angelica-seed,angelica seed,,herbal,ハーバル,33,0,false
+ginger-flower,ginger flower,ジンジャーフラワー,white_floral,ホワイトフローラル,33,0,false
+spindrift,spindrift,,aquatic,アクアティック,33,0,false
+paradisone,paradisone,,synthetic,合成香料,33,0,false
+chestnut,chestnut,栗,woody,ウッディ,32,1,false
+costus,costus,コスタス,animalic,アニマリック,32,1,false
+raspberry-leaf,raspberry leaf,,green,グリーン,32,1,false
+salted-caramel,salted caramel,塩キャラメル,gourmand,グルマン,32,0,false
+sugar-cane,sugar cane,,gourmand,グルマン,32,2,false
+plum-blossom,plum blossom,梅の花,floral,フローラル,32,0,false
+spruce,spruce,スプルース,woody,ウッディ,32,0,false
+pelargonium,pelargonium,,other,その他,31,0,false
+cane-sugar,cane sugar,サトウキビ,gourmand,グルマン,31,0,false
+amaretto,amaretto,アマレット,boozy,アルコーリック,31,0,false
+grapefruit-blossom,grapefruit blossom,,white_floral,ホワイトフローラル,31,1,false
+dragon-fruit,dragon fruit,,fruity,フルーティ,31,0,false
+pineapple-leaf,pineapple leaf,,green,グリーン,31,0,false
+fougere,fougère,,other,その他,31,1,false
+poppy,poppy,ポピー,floral,フローラル,31,2,false
+aquatic-flowers,aquatic flowers,,white_floral,ホワイトフローラル,30,0,false
+sunflower,sunflower,ひまわり,floral,フローラル,30,1,false
+bergamot-zest,bergamot zest,ベルガモットの皮,citrus,シトラス,30,1,false
+water-mint,water mint,,herbal,ハーバル,30,0,false
+ice,ice,,other,その他,29,1,false
+calamus,calamus,菖蒲,herbal,ハーバル,29,2,false
+blond-tobacco,blond tobacco,ブロンドタバコ,tobacco,タバコ,29,1,false
+linden-tree,linden tree,,white_floral,ホワイトフローラル,29,0,false
+white-honey,white honey,,gourmand,グルマン,29,0,false
+cascalone,cascalone,,synthetic,合成香料,29,0,false
+orange-blossom-water,orange blossom water,,white_floral,ホワイトフローラル,29,3,false
+boronia,boronia,,floral,フローラル,29,1,false
+apricot-blossom,apricot blossom,,floral,フローラル,29,0,false
+red-ginger,red ginger,,spicy,スパイシー,29,1,false
+exotic-blossoms,exotic blossoms,,floral,フローラル,28,0,false
+white-leather,white leather,,leather,レザー,28,0,false
+olive-blossom,olive blossom,,white_floral,ホワイトフローラル,28,0,false
+pear-sorbet,pear sorbet,,fruity,フルーティ,28,0,false
+green-cardamom,green cardamom,グリーンカルダモン,spicy,スパイシー,28,1,false
+frankincense-resin,frankincense resin,,balsamic,バルサミック,28,0,false
+seagrass,seagrass,海藻,green,グリーン,28,1,false
+crystallised-moss,crystallised moss,,earthy,アーシー,28,0,false
+buchu,buchu,,green,グリーン,28,0,false
+vanilla-cream,vanilla cream,バニラクリーム,gourmand,グルマン,27,0,false
+dewberry,dewberry,,fruity,フルーティ,27,0,false
+gin,gin,ジン,boozy,アルコーリック,27,0,false
+kaffir-lime,kaffir lime,カフィアライム,citrus,シトラス,27,0,false
+canary-islands-juniper,canary islands juniper,,other,その他,27,0,false
+mandarin-orange-blossom,mandarin orange blossom,,white_floral,ホワイトフローラル,27,0,false
+fenugreek,fenugreek,,herbal,ハーバル,27,2,false
+candied-fruits,candied fruits,砂糖漬けの果実,fruity,フルーティ,27,0,false
+sweet-acacia,sweet acacia,,white_floral,ホワイトフローラル,27,1,false
+sour-cherry,sour cherry,サワーチェリー,fruity,フルーティ,27,0,false
+tamarind,tamarind,タマリンド,fruity,フルーティ,26,0,false
+prune,prune,プルーン,fruity,フルーティ,26,0,false
+queen-of-the-night,queen-of-the-night,,white_floral,ホワイトフローラル,26,0,false
+cactus-blossom,cactus blossom,,white_floral,ホワイトフローラル,26,0,false
+flowers,flowers,花,floral,フローラル,26,1,false
+peach-skin,peach skin,桃の産毛,fruity,フルーティ,26,0,false
+petalia,petalia,,synthetic,合成香料,26,0,false
+green-lemon,green lemon,,citrus,シトラス,26,0,false
+amaryllis,amaryllis,,floral,フローラル,25,0,false
+white-lotus,white lotus,白蓮,white_floral,ホワイトフローラル,25,2,false
+shiso,shiso,紫蘇,green,グリーン,25,1,false
+creamy-notes,creamy notes,クリーミーノート,gourmand,グルマン,25,0,false
+rain,rain,,aquatic,アクアティック,24,1,false
+black-locust,black locust,,woody,ウッディ,24,0,false
+talcum,talcum,タルカムパウダー,powdery,パウダリー,24,0,false
+sugar-powder,sugar powder,,gourmand,グルマン,24,0,false
+roasted-almond,roasted almond,,gourmand,グルマン,24,0,false
+parma-violet,parma violet,パルマスミレ,floral,フローラル,23,0,false
+sesame,sesame,,other,その他,23,2,false
+finger-lime,finger lime,,citrus,シトラス,23,0,false
+blue-atlas-cedar,blue atlas cedar,,woody,ウッディ,23,0,false
+butter,butter,バター,gourmand,グルマン,23,2,false
+truffle,truffle,トリュフ,gourmand,グルマン,23,0,false
+red-peony,red peony,,floral,フローラル,23,0,false
+roasted-tonka-bean,roasted tonka bean,,gourmand,グルマン,23,1,false
+pittosporum,pittosporum,,woody,ウッディ,23,0,false
+yellow-freesia,yellow freesia,,white_floral,ホワイトフローラル,23,0,false
+pink-rose,pink rose,,floral,フローラル,23,0,false
+ambrettolide,ambrettolide,,musk,ムスク,23,0,false
+blackcurrant-liqueur,blackcurrant liqueur,,boozy,アルコーリック,23,0,false
+celery,celery,セロリ,herbal,ハーバル,22,0,false
+pink-lotus,pink lotus,,other,その他,22,1,false
+white-gingerlily,white gingerlily,,white_floral,ホワイトフローラル,22,0,false
+apricot-nectar,apricot nectar,,fruity,フルーティ,22,0,false
+salicylate,salicylate,,synthetic,合成香料,22,0,false
+liatris-spicata,liatris spicata,,other,その他,22,1,false
+williams-pear,williams pear,,fruity,フルーティ,22,0,false
+kahili-ginger,kahili ginger,,white_floral,ホワイトフローラル,22,0,false
+fig-milk,fig milk,,fruity,フルーティ,22,0,false
+minneola-tangelo,minneola tangelo,,fruity,フルーティ,22,0,false
+shiso-leaf,shiso leaf,紫蘇の葉,green,グリーン,22,0,false
+saffron-blossom,saffron blossom,,floral,フローラル,22,0,false
+grapefruit-zest,grapefruit zest,グレープフルーツの皮,citrus,シトラス,22,0,false
+stephanotis,stephanotis,ステファノティス,white_floral,ホワイトフローラル,22,0,false
+blue-iris,blue iris,,floral,フローラル,22,0,false
+green-almond,green almond,,gourmand,グルマン,22,0,false
+dragee,dragée,,gourmand,グルマン,22,0,false
+earl-grey-tea,earl grey tea,,tea,ティー,22,0,false
+fig-wood,fig wood,,woody,ウッディ,21,0,false
+orange-leaf,orange leaf,オレンジリーフ,citrus,シトラス,21,0,false
+rice-powder,rice powder,米粉,powdery,パウダリー,21,0,false
+dulce-de-leche,dulce de leche,ドゥルセ・デ・レチェ,gourmand,グルマン,21,0,false
+mate-tea,maté tea,,tea,ティー,21,0,false
+lichen,lichen,地衣類,earthy,アーシー,21,0,false
+bitter-orange-leaf,bitter orange leaf,,citrus,シトラス,21,0,false
+jonquil,jonquil,,other,その他,21,1,false
+bay-rum,bay rum,,boozy,アルコーリック,21,0,false
+rose-hip,rose hip,ローズヒップ,floral,フローラル,21,0,false
+rhubarb-leaf,rhubarb leaf,,green,グリーン,21,0,false
+hemp,hemp,,other,その他,20,2,false
+sequoia,sequoia,セコイア,woody,ウッディ,20,0,false
+hyssop,hyssop,ヒソップ,herbal,ハーバル,20,0,false
+black-cardamom,black cardamom,,spicy,スパイシー,20,0,false
+dark-woods,dark woods,ダークウッド,woody,ウッディ,20,0,false
+nuts,nuts,ナッツ,gourmand,グルマン,20,0,false
+currant-leaf,currant leaf,,green,グリーン,20,0,false
+acai,açaí,,fruity,フルーティ,20,0,false
+matcha,matcha,抹茶,tea,ティー,20,0,false
+fir-needle,fir needle,,other,その他,20,1,false
+mineral-amber,mineral amber,,balsamic,バルサミック,20,0,false
+cabreuva,cabreuva,,other,その他,20,1,false
+muscenone,muscenone,,musk,ムスク,20,0,false
+cade-juniper,cade juniper,,woody,ウッディ,20,0,false
+basmati-rice,basmati rice,,gourmand,グルマン,20,0,false
+camphor,camphor,カンファー,herbal,ハーバル,20,0,false
+georgywood,georgywood,,woody,ウッディ,20,0,false
+casablanca-lily,casablanca lily,,white_floral,ホワイトフローラル,20,0,false
+black-violet,black violet,,floral,フローラル,20,0,false

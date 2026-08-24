@@ -9,7 +9,8 @@
 
 ## ステータス
 
-**要件定義フェーズ**。実装はまだ開始していない。
+**Phase 0（基盤）完了**。認証・デザイントークン・DB スキーマ・香料マスタまで。
+香水検索・試香ログ・好み分析は Phase 1 以降（[docs/roadmap.md](docs/roadmap.md)）。
 
 ## ドキュメント
 
@@ -25,9 +26,59 @@
 
 ## 技術スタック
 
-- **モバイル**: Flutter（iOS / Android）
+- **モバイル**: Flutter（iOS / Android）+ Riverpod + go_router
 - **バックエンド**: Supabase（PostgreSQL / Auth / Storage / Edge Functions）
-- **OCR**: Google ML Kit（オンデバイス・テキスト認識）
+- **OCR**: Google ML Kit（オンデバイス・テキスト認識）— Phase 4
+- **取り込み**: Python（外部依存なし）
+
+## ディレクトリ構成
+
+```
+app/                 Flutter アプリ
+supabase/
+  migrations/        DB スキーマ
+  seed/              香料・香調マスタのシード（生成物）
+  tests/             RLS ポリシーの検証
+tools/ingestion/     香水マスタの取り込み・正規化パイプライン
+scripts/             検証スクリプト
+docs/                要件定義・設計
+```
+
+## セットアップ
+
+```bash
+# 1. プラットフォームの雛形を生成（このリポジトリには含めていない）
+cd app && flutter create --platforms=ios,android --org com.example .
+flutter pub get
+
+# 2. ローカルの Supabase を起動してスキーマを流す
+supabase start
+supabase db reset
+
+# 3. アプリを起動
+flutter run \
+  --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=eyJhbGci...
+```
+
+接続情報は `app/.env.example` を参照。クライアントに置いてよいのは anon key のみ。
+
+## 検証
+
+```bash
+./scripts/db_test.sh                  # マイグレーション・シード・RLS を実際の Postgres で検証
+python scripts/check_consistency.py   # 生成データとアプリコードの整合性
+cd tools/ingestion && python -m pytest tests/ -q
+cd app && flutter analyze && flutter test
+```
+
+## 香水マスタ
+
+香料 497 語・香調 21 種を収録（[tools/ingestion/README.md](tools/ingestion/README.md)）。
+
+産地違い・抽出法違いの表記（`Bulgarian rose` / `Turkish rose absolute` …）は
+正規形へ寄せ、元の表記は別名として保持している。
+一次ソースに混入していた実在しない香料名は除外済み（ADR-013）。
 
 ## リポジトリ履歴について
 

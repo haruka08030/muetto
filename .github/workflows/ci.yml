@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  database:
+    name: DB マイグレーション・RLS 検証
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - name: psql を入れる
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+      - name: マイグレーション・シード・RLS を検証
+        run: ./scripts/db_test.sh
+
+  ingestion:
+    name: 取り込みパイプライン
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+      - name: 正規化ロジックのテスト
+        working-directory: tools/ingestion
+        run: python -m pytest tests/ -q
+      - name: 生成データとアプリの整合性
+        run: python scripts/check_consistency.py
+
+  app:
+    name: Flutter
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - name: フォーマット
+        run: dart format --set-exit-if-changed lib test
+      - name: 静的解析
+        run: flutter analyze
+      - name: ユニットテスト
+        run: flutter test

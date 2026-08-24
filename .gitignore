@@ -41,6 +41,11 @@ __pycache__/
 venv/
 .mypy_cache/
 .ruff_cache/
+.pytest_cache/
+
+# 取り込みの一次データ。リポジトリには入れない（再配布しない方針）。
+# 必要なときは python -m ingestion.fetch で取得する。
+tools/ingestion/.cache/
 
 # ---- 秘匿情報 ----
 .env
