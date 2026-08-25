@@ -1,0 +1,34 @@
+name: perfume_app
+description: 試香ログと好み分析のためのパーソナル香水管理アプリ。
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # 状態管理・ルーティング
+  flutter_riverpod: ^2.5.1
+  go_router: ^14.2.7
+
+  # バックエンド
+  supabase_flutter: ^2.5.11
+
+  # intl はここで宣言しない。
+  # flutter_localizations（SDK 同梱）が intl のバージョンを固定するため、
+  # 直接宣言すると SDK 更新のたびに解決が衝突する。
+  # 日付整形などで実際に必要になった時点で、SDK が要求する版に合わせて追加する。
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
