@@ -3,7 +3,7 @@
 -- このファイルは tools/ingestion が生成する。直接編集しないこと。
 --   cd tools/ingestion && python -m ingestion.build_masters && python -m ingestion.emit_seed
 --
--- 香調アコード 21 件 / 香料 497 件 / 別名 1146 件
+-- 香調アコード 21 件 / 香料 497 件 / 別名 1195 件
 -- 出所と生成手順は docs/data-ingestion.md を参照。
 
 insert into accords (slug, name_en, name_ja, sort_order) values
@@ -1684,7 +1684,56 @@ select v.alias, n.id from (values
   ('tahitian ylang-ylang', 'ylang-ylang'),
   ('malayan ylang-ylang', 'ylang-ylang'),
   ('japanese yuzu', 'yuzu'),
-  ('korean yuzu', 'yuzu')
+  ('korean yuzu', 'yuzu'),
+  ('absinthe', 'wormwood'),
+  ('agarwood', 'oud'),
+  ('aldehyde', 'aldehydes'),
+  ('animalic', 'animalic-notes'),
+  ('aoud', 'oud'),
+  ('aromatic', 'aromatic-notes'),
+  ('balsamic', 'balsamic-notes'),
+  ('black currant', 'blackcurrant'),
+  ('boswellia', 'frankincense'),
+  ('cacao', 'cocoa'),
+  ('cananga odorata', 'ylang-ylang'),
+  ('cassis', 'blackcurrant'),
+  ('cedar wood', 'cedarwood'),
+  ('citrus aurantium', 'bitter-orange'),
+  ('commiphora', 'myrrh'),
+  ('creamy', 'creamy-notes'),
+  ('fresh', 'fresh-notes'),
+  ('gaiacwood', 'gaiac-wood'),
+  ('green', 'green-notes'),
+  ('guaiac wood', 'gaiac-wood'),
+  ('guaiacwood', 'gaiac-wood'),
+  ('isoesuper', 'iso-e-super'),
+  ('jasminum sambac', 'jasmine-sambac'),
+  ('labdanum resin', 'labdanum'),
+  ('leathery', 'leather'),
+  ('lily-of-the-valley', 'lily-of-the-valley'),
+  ('mandarin', 'mandarin-orange'),
+  ('marine', 'aquatic'),
+  ('metallic', 'metallic-notes'),
+  ('mossy', 'oakmoss'),
+  ('muguet', 'lily-of-the-valley'),
+  ('neroli oil', 'neroli'),
+  ('olibanum', 'frankincense'),
+  ('orris', 'iris'),
+  ('oudh', 'oud'),
+  ('petigrain', 'petitgrain'),
+  ('petit grain', 'petitgrain'),
+  ('powdery', 'powdery-notes'),
+  ('provencal lavender', 'lavender'),
+  ('sandal', 'sandalwood'),
+  ('santal', 'sandalwood'),
+  ('sea water', 'seawater'),
+  ('storax', 'benzoin'),
+  ('sweet', 'sweet-notes'),
+  ('szechuan pepper', 'sichuan-pepper'),
+  ('vanilla bean', 'vanilla'),
+  ('vanille', 'vanilla'),
+  ('woody', 'woody-notes'),
+  ('ylang ylang', 'ylang-ylang')
 ) as v (alias, note_slug)
 join notes n on n.slug = v.note_slug
 on conflict (alias) do update set note_id = excluded.note_id;
