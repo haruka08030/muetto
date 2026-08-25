@@ -21,7 +21,7 @@ from .config import DATA_DIR, MIN_ACCORD_FREQUENCY, MIN_NOTE_FREQUENCY
 from .families import FAMILY_LABELS_JA, classify
 from .fetch import parfumo_csv
 from .ja_names import ACCORD_NAMES_JA, NOTE_NAMES_JA
-from .normalize import clean, resolve, slugify
+from .normalize import SYNONYM_OVERRIDES, clean, resolve, slugify
 
 NOTE_COLUMNS = ("Top_Notes", "Middle_Notes", "Base_Notes")
 
@@ -78,14 +78,29 @@ def write_notes(note_freq, aliases) -> int:
                 "true" if name in SUSPECT_BUT_KEPT else "false",
             ])
 
+    # 手動で定義した別名も書き出す。
+    # 一次データに出現しなかったものは aliases に入らないが、
+    # DB 側の resolve_note_id はこの表しか見ないため、載せておかないと解決できない。
+    adopted_set = {n for n, _ in adopted}
+    manual: dict[str, str] = {}
+    for alias in SYNONYM_OVERRIDES:
+        canonical = resolve(alias)
+        if canonical in adopted_set and alias != canonical:
+            manual[alias] = canonical
+
     # set をそのまま回すと実行ごとに順序が変わり、生成物に差分が出る。
     # 生成物はコミットするため、必ず決定的な順序で書き出す。
     with (DATA_DIR / "note_aliases.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["alias", "canonical_slug", "canonical_name_en", "frequency"])
-        for name in sorted(n for n, _ in adopted):
+        emitted = set()
+        for name in sorted(adopted_set):
             for alias, freq in sorted(aliases.get(name, {}).items(), key=lambda kv: -kv[1]):
                 w.writerow([alias, slugify(name), name, freq])
+                emitted.add(alias)
+        for alias, canonical in sorted(manual.items()):
+            if alias not in emitted:
+                w.writerow([alias, slugify(canonical), canonical, 0])
 
     with (DATA_DIR / "unmapped_notes.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)

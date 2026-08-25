@@ -64,3 +64,6 @@ Thumbs.db
 *.log
 logs/
 tmp/
+
+# 取り込みの中間生成物（ローカル開発用のフィクスチャなど）。
+tools/ingestion/.local/
