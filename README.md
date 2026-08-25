@@ -9,8 +9,10 @@
 
 ## ステータス
 
-**Phase 0（基盤）完了**。認証・デザイントークン・DB スキーマ・香料マスタまで。
-香水検索・試香ログ・好み分析は Phase 1 以降（[docs/roadmap.md](docs/roadmap.md)）。
+**Phase 1（香水 DB と検索）まで実装済み**。認証・DB スキーマ・香料マスタ・
+取り込みパイプライン・香水検索・香水詳細まで。
+残るのは本番データの投入（公式サイトと EC の公式 API の資格情報が要る）。
+試香ログ・好み分析は Phase 2 以降（[docs/roadmap.md](docs/roadmap.md)）。
 
 ## ドキュメント
 
@@ -71,6 +73,20 @@ python scripts/check_consistency.py   # 生成データとアプリコードの�
 cd tools/ingestion && python -m pytest tests/ -q
 cd app && flutter analyze && flutter test
 ```
+
+## ローカル開発時のデータ投入
+
+検索を動かすには香水レコードが必要。一次データセットのレコードは
+再配布しない方針のため（ADR-017）、ローカルで生成する。
+
+```bash
+cd tools/ingestion
+python -m ingestion.sources.dev_fixture --limit 2000   # .local/ に出力（gitignore 済み）
+psql -f .local/dev_perfumes.sql
+psql -c "select * from merge_staging_batch('d0000000-0000-4000-8000-000000000001', true);"
+```
+
+本番のマスタは公式サイトと楽天ウェブサービス / Amazon PA-API から作る。
 
 ## 香水マスタ
 

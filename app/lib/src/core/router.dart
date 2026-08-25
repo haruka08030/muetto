@@ -4,11 +4,15 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/auth_controller.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/perfume/perfume_detail_screen.dart';
+import '../features/search/search_screen.dart';
 
 /// 画面 ID。パス文字列を直接書かないための定数。
 abstract final class Routes {
   static const signIn = '/sign-in';
   static const home = '/';
+  static const search = '/search';
+  static const perfume = '/perfume';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -41,6 +45,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: Routes.search,
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: '${Routes.perfume}/:id',
+        builder: (context, state) =>
+            PerfumeDetailScreen(perfumeId: state.pathParameters['id']!),
       ),
     ],
   );
