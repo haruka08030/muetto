@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../core/router.dart';
 import '../../theme/app_theme.dart';
 import '../auth/auth_controller.dart';
 
@@ -41,10 +43,16 @@ class HomeScreen extends ConsumerWidget {
               child: const Padding(
                 padding: EdgeInsets.all(AppSpacing.md),
                 child: Text(
-                  'Phase 0（基盤）まで実装済みです。\n'
-                  '香水検索・試香ログ・好み分析は Phase 1 以降で追加します。',
+                  '香水検索まで実装済みです。\n'
+                  '試香ログ・好み分析は Phase 2 以降で追加します。',
                 ),
               ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            FilledButton.icon(
+              onPressed: () => context.push(Routes.search),
+              icon: const Icon(Icons.search),
+              label: const Text('香水を検索する'),
             ),
           ],
         ),
