@@ -9,8 +9,10 @@
 
 ## ステータス
 
-**Phase 0（基盤）完了**。認証・デザイントークン・DB スキーマ・香料マスタまで。
-香水検索・試香ログ・好み分析は Phase 1 以降（[docs/roadmap.md](docs/roadmap.md)）。
+**Phase 1（香水 DB と検索）まで実装済み**。認証・DB スキーマ・香料マスタ・
+取り込みパイプライン・香水検索・香水詳細まで。
+残るのは本番データの投入（公式サイトと EC の公式 API の資格情報が要る）。
+試香ログ・好み分析は Phase 2 以降（[docs/roadmap.md](docs/roadmap.md)）。
 
 ## ドキュメント
 
@@ -47,21 +49,42 @@ docs/                要件定義・設計
 ## セットアップ
 
 ```bash
-# 1. プラットフォームの雛形を生成（このリポジトリには含めていない）
-cd app && flutter create --platforms=ios,android --org com.example .
-flutter pub get
+git clone https://github.com/haruka08030/x-to-notion.git
+cd x-to-notion
+./scripts/setup.sh
+```
 
-# 2. ローカルの Supabase を起動してスキーマを流す
-supabase start
-supabase db reset
+必要なツールを確認し、Flutter のプラットフォーム雛形（`app/ios`, `app/android`）を
+生成して依存を取得する。冪等なので何度実行してもよい。
 
-# 3. アプリを起動
+`app/ios` と `app/android` はリポジトリに含めていない。
+Bundle ID がプロダクト名に依存するため、名前が確定するまで固定したくないから。
+確定したら次のように生成し直す。
+
+```bash
+rm -rf app/ios app/android
+ORG=com.yourorg PROJECT_NAME=yourapp ./scripts/setup.sh
+```
+
+### 必要なもの
+
+| ツール | 用途 |
+|---|---|
+| Flutter 3.35 以上 | アプリ本体 |
+| Python 3.11 以上 | 取り込みパイプライン（外部依存なし） |
+| PostgreSQL 15 以上 または Supabase CLI | DB の検証 |
+
+### 接続情報
+
+`app/.env.example` を参照。`--dart-define` で渡す。
+クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
+
+```bash
+cd app
 flutter run \
   --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
-
-接続情報は `app/.env.example` を参照。クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
 
 ## 検証
 
@@ -71,6 +94,20 @@ python scripts/check_consistency.py   # 生成データとアプリコードの�
 cd tools/ingestion && python -m pytest tests/ -q
 cd app && flutter analyze && flutter test
 ```
+
+## ローカル開発時のデータ投入
+
+検索を動かすには香水レコードが必要。一次データセットのレコードは
+再配布しない方針のため（ADR-017）、ローカルで生成する。
+
+```bash
+cd tools/ingestion
+python -m ingestion.sources.dev_fixture --limit 2000   # .local/ に出力（gitignore 済み）
+psql -f .local/dev_perfumes.sql
+psql -c "select * from merge_staging_batch('d0000000-0000-4000-8000-000000000001', true);"
+```
+
+本番のマスタは公式サイトと楽天ウェブサービス / Amazon PA-API から作る。
 
 ## 香水マスタ
 
