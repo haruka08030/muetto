@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:perfume_app/src/data/perfume_repository.dart';
+import 'package:muetto/src/data/perfume_repository.dart';
 
 void main() {
   group('SearchFilters', () {

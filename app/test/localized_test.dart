@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:perfume_app/src/models/localized.dart';
+import 'package:muetto/src/models/localized.dart';
 
 void main() {
   group('localizedName', () {

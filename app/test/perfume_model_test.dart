@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:perfume_app/src/models/perfume.dart';
+import 'package:muetto/src/models/perfume.dart';
 
 void main() {
   group('PerfumeSummary.fromJson', () {

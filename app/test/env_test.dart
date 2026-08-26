@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:perfume_app/src/core/env.dart';
+import 'package:muetto/src/core/env.dart';
 
 void main() {
   group('Env', () {
