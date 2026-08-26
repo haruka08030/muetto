@@ -49,21 +49,42 @@ docs/                要件定義・設計
 ## セットアップ
 
 ```bash
-# 1. プラットフォームの雛形を生成（このリポジトリには含めていない）
-cd app && flutter create --platforms=ios,android --org com.example .
-flutter pub get
+git clone https://github.com/haruka08030/x-to-notion.git
+cd x-to-notion
+./scripts/setup.sh
+```
 
-# 2. ローカルの Supabase を起動してスキーマを流す
-supabase start
-supabase db reset
+必要なツールを確認し、Flutter のプラットフォーム雛形（`app/ios`, `app/android`）を
+生成して依存を取得する。冪等なので何度実行してもよい。
 
-# 3. アプリを起動
+`app/ios` と `app/android` はリポジトリに含めていない。
+Bundle ID がプロダクト名に依存するため、名前が確定するまで固定したくないから。
+確定したら次のように生成し直す。
+
+```bash
+rm -rf app/ios app/android
+ORG=com.yourorg PROJECT_NAME=yourapp ./scripts/setup.sh
+```
+
+### 必要なもの
+
+| ツール | 用途 |
+|---|---|
+| Flutter 3.35 以上 | アプリ本体 |
+| Python 3.11 以上 | 取り込みパイプライン（外部依存なし） |
+| PostgreSQL 15 以上 または Supabase CLI | DB の検証 |
+
+### 接続情報
+
+`app/.env.example` を参照。`--dart-define` で渡す。
+クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
+
+```bash
+cd app
 flutter run \
   --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
-
-接続情報は `app/.env.example` を参照。クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
 
 ## 検証
 
