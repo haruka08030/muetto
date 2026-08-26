@@ -7,7 +7,7 @@ build/
 *.iml
 .flutter-plugins
 .flutter-plugins-dependencies
-pubspec.lock
+# pubspec.lock はアプリなのでコミットする（依存バージョンを固定）
 
 # 生成コード
 *.g.dart
