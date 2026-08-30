@@ -23,6 +23,10 @@ dependencies:
   # 実行時設定。.env を読む（--dart-define が優先）
   flutter_dotenv: ^6.0.1
 
+  # オフライン下書きの保存先。件数が少なく検索も要らないので、
+  # ローカル DB ではなくキーと値の保存で足りる。
+  shared_preferences: ^2.5.5
+
   # intl はここで宣言しない。
   # flutter_localizations（SDK 同梱）が intl のバージョンを固定するため、
   # 直接宣言すると SDK 更新のたびに解決が衝突する。

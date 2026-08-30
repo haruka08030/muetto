@@ -7,6 +7,7 @@ import '../../models/localized.dart';
 import '../../models/tasting_log.dart';
 import '../../theme/app_theme.dart';
 import '../auth/auth_controller.dart';
+import '../log/draft_sync.dart';
 import '../log/log_list_controller.dart';
 import '../log/rating_stars.dart';
 
@@ -14,11 +15,28 @@ import '../log/rating_stars.dart';
 ///
 /// 最近のログとコレクションの概要を出す。好み傾向とレコメンドは
 /// Phase 3 で足す（docs/screens.md 1）。
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // 溜まっている下書きを送る。ホームは必ず通るので、
+    // ここに置けば起動専用の画面を作らずに済む。
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!ref.read(guestModeProvider)) {
+        ref.read(draftSyncProvider.notifier).flush();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final isGuest = ref.watch(guestModeProvider);
 
     return Scaffold(
@@ -38,11 +56,61 @@ class HomeScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.lg),
           children: [
-            if (isGuest) const _GuestNotice() else const _RecentLogs(),
+            if (isGuest)
+              const _GuestNotice()
+            else ...[
+              const _PendingDrafts(),
+              const _RecentLogs(),
+            ],
             const SizedBox(height: AppSpacing.lg),
             const _SearchAction(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// 未送信の下書きがあることを控えめに伝える。
+///
+/// 警告としては出さない。オフラインであることを意識させないのが
+/// 方針で（docs/screens.md 3）、ここで不安にさせても打つ手がない。
+class _PendingDrafts extends ConsumerWidget {
+  const _PendingDrafts();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final drafts = ref.watch(draftsProvider);
+    final count = drafts.valueOrNull?.length ?? 0;
+    if (count == 0) {
+      return const SizedBox.shrink();
+    }
+
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Row(
+        children: [
+          Icon(
+            Icons.cloud_upload_outlined,
+            size: 18,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              '$count 件を送信待ちです',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () => ref.read(draftSyncProvider.notifier).flush(),
+            child: const Text('今すぐ送る'),
+          ),
+        ],
       ),
     );
   }

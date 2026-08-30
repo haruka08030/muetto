@@ -6,6 +6,10 @@ import '../models/tasting_log.dart';
 class TastingLogRepository {
   const TastingLogRepository();
 
+  /// 送信できる状態か。オフラインで失敗したのか、そもそも
+  /// ログインしていないのかを呼び出し側が区別するために使う。
+  bool get isSignedIn => supabase.auth.currentUser != null;
+
   /// ログを保存する。user_id は RLS の既定値で埋まるため送らない。
   Future<TastingLog> create({
     required String perfumeId,

@@ -58,25 +58,43 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
     final controller = ref.read(logControllerProvider.notifier);
     final existing = widget.existing;
 
-    final saved = existing == null
-        ? await controller.save(
-            perfumeId: widget.perfume.id,
-            rating: _rating,
-            memo: _memo.text,
-            method: _method?.value,
-            wantToBuy: _wantToBuy,
-          )
-        : await controller.update(
-            logId: existing.id,
-            perfumeId: widget.perfume.id,
-            rating: _rating,
-            memo: _memo.text,
-            method: _method?.value,
-            wantToBuy: _wantToBuy,
-          );
-
-    if (!saved || !mounted) {
+    // 書き換えは下書きに落とさない。元がサーバにあるので、
+    // 端末側に別の版を作ると、どちらが正しいか決められなくなる。
+    if (existing != null) {
+      final updated = await controller.update(
+        logId: existing.id,
+        perfumeId: widget.perfume.id,
+        rating: _rating,
+        memo: _memo.text,
+        method: _method?.value,
+        wantToBuy: _wantToBuy,
+      );
+      if (updated && mounted) {
+        Navigator.of(context).pop(true);
+      }
       return;
+    }
+
+    final result = await controller.save(
+      perfume: widget.perfume,
+      rating: _rating,
+      memo: _memo.text,
+      method: _method?.value,
+      wantToBuy: _wantToBuy,
+    );
+
+    if (!mounted || result == LogSaveResult.failed) {
+      return;
+    }
+
+    // 下書きになったことは伝えるが、失敗としては見せない。
+    // オフラインであることを意識させない（docs/screens.md 3）。
+    if (result == LogSaveResult.draft) {
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          const SnackBar(content: Text('通信できないため端末に保存しました。あとで自動的に送ります')),
+        );
     }
     Navigator.of(context).pop(true);
   }
