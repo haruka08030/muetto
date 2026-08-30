@@ -32,7 +32,5 @@ final logsForPerfumeProvider =
       ref,
       perfumeId,
     ) async {
-      return ref
-          .read(tastingLogRepositoryProvider)
-          .list(perfumeId: perfumeId);
+      return ref.read(tastingLogRepositoryProvider).list(perfumeId: perfumeId);
     });

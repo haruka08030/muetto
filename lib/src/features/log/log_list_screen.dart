@@ -73,28 +73,26 @@ class LogListView extends ConsumerWidget {
     AsyncValue<List<TastingLogWithPerfume>> logs,
   ) {
     return logs.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => _Message(
-          icon: Icons.error_outline,
-          text: '読み込めませんでした\n$error',
-        ),
-        data: (items) {
-          if (items.isEmpty) {
-            return const _Message(
-              icon: Icons.edit_note_outlined,
-              text: 'まだログがありません\n＋ボタンから最初の記録を書けます',
-            );
-          }
-
-          return RefreshIndicator(
-            onRefresh: () async => ref.invalidate(logListProvider),
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-              itemCount: items.length,
-              separatorBuilder: (context, index) => const Divider(height: 1),
-              itemBuilder: (context, index) => _LogTile(item: items[index]),
-            ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) =>
+          _Message(icon: Icons.error_outline, text: '読み込めませんでした\n$error'),
+      data: (items) {
+        if (items.isEmpty) {
+          return const _Message(
+            icon: Icons.edit_note_outlined,
+            text: 'まだログがありません\n＋ボタンから最初の記録を書けます',
           );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () async => ref.invalidate(logListProvider),
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+            itemCount: items.length,
+            separatorBuilder: (context, index) => const Divider(height: 1),
+            itemBuilder: (context, index) => _LogTile(item: items[index]),
+          ),
+        );
       },
     );
   }

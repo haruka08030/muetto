@@ -80,10 +80,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         branches: [
           _branch(Routes.home, (context, state) => const HomeScreen()),
           _branch(Routes.search, (context, state) => const SearchScreen()),
-          _branch(
-            Routes.log,
-            (context, state) => const PickPerfumeScreen(),
-          ),
+          _branch(Routes.log, (context, state) => const PickPerfumeScreen()),
           _branch(
             Routes.collection,
             (context, state) => const CollectionScreen(),

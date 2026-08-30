@@ -60,7 +60,6 @@ enum TastingMethod {
   final String label;
 }
 
-
 /// 一覧に出すための、ログと香水を組にしたもの。
 ///
 /// 一覧では香水名を必ず出すので、ログ単体では足りない。

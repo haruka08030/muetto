@@ -34,8 +34,6 @@ class AppShell extends ConsumerWidget {
     ),
   ];
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -164,7 +162,11 @@ class _BarButton extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(isSelected ? item.selected : item.icon, color: color, size: 24),
+              Icon(
+                isSelected ? item.selected : item.icon,
+                color: color,
+                size: 24,
+              ),
               const SizedBox(height: 2),
               // アイコンだけで並べない（docs/screens.md 6）。
               Text(

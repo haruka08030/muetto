@@ -65,12 +65,14 @@ class TastingLogRepository {
 
     final rows = await switch (sort) {
       // 同じ日に複数付けたときのために created_at を第二キーにする。
-      LogSort.recent => query
-          .order('tested_at', ascending: false)
-          .order('created_at', ascending: false),
-      LogSort.rating => query
-          .order('rating', ascending: false)
-          .order('tested_at', ascending: false),
+      LogSort.recent =>
+        query
+            .order('tested_at', ascending: false)
+            .order('created_at', ascending: false),
+      LogSort.rating =>
+        query
+            .order('rating', ascending: false)
+            .order('tested_at', ascending: false),
     }.range(offset, offset + limit - 1);
 
     return rows

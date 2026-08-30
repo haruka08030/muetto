@@ -4,8 +4,9 @@ import '../../data/tasting_log_repository.dart';
 import 'log_list_controller.dart';
 
 /// ログ保存の進行状態。画面はこれを見てボタンを止める。
-final logControllerProvider =
-    NotifierProvider<LogController, AsyncValue<void>>(LogController.new);
+final logControllerProvider = NotifierProvider<LogController, AsyncValue<void>>(
+  LogController.new,
+);
 
 class LogController extends Notifier<AsyncValue<void>> {
   @override
@@ -21,13 +22,15 @@ class LogController extends Notifier<AsyncValue<void>> {
   }) async {
     state = const AsyncLoading();
     final result = await AsyncValue.guard(
-      () => ref.read(tastingLogRepositoryProvider).create(
-        perfumeId: perfumeId,
-        rating: rating,
-        memo: memo,
-        method: method,
-        wantToBuy: wantToBuy,
-      ),
+      () => ref
+          .read(tastingLogRepositoryProvider)
+          .create(
+            perfumeId: perfumeId,
+            rating: rating,
+            memo: memo,
+            method: method,
+            wantToBuy: wantToBuy,
+          ),
     );
     state = result.hasError
         ? AsyncError(result.error!, StackTrace.current)

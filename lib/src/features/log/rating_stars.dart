@@ -6,11 +6,7 @@ import 'package:flutter/material.dart';
 /// 微調整できる（ADR-004）。店頭ではタップ 1 回で終わらせ、
 /// じっくり付けたいときだけドラッグする、という使い分けを想定している。
 class RatingStars extends StatelessWidget {
-  const RatingStars({
-    required this.rating,
-    required this.onChanged,
-    super.key,
-  });
+  const RatingStars({required this.rating, required this.onChanged, super.key});
 
   /// 1.0〜5.0。0 は「まだ付けていない」を表す。
   final double rating;
@@ -136,17 +132,12 @@ class RatingValue extends StatelessWidget {
   }
 }
 
-
 /// 読み取り専用の星。一覧やカードで評価を出すために使う。
 ///
 /// 入力用の [RatingStars] とは別にする。あちらは指の位置を計算するために
 /// 固定幅が要るが、こちらは行に収まる大きさで並べたいだけ。
 class RatingStarsDisplay extends StatelessWidget {
-  const RatingStarsDisplay({
-    required this.rating,
-    this.size = 16,
-    super.key,
-  });
+  const RatingStarsDisplay({required this.rating, this.size = 16, super.key});
 
   final double rating;
   final double size;

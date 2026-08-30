@@ -23,10 +23,7 @@ class Env {
   /// 完結させられる。ローカル開発では `.env` に置いたままで動く。
   factory Env.resolve() => Env(
     supabaseUrl: _read('SUPABASE_URL', _dartDefineUrl),
-    supabasePublishableKey: _read(
-      'SUPABASE_PUBLISHABLE_KEY',
-      _dartDefineKey,
-    ),
+    supabasePublishableKey: _read('SUPABASE_PUBLISHABLE_KEY', _dartDefineKey),
   );
 
   static const String _dartDefineUrl = String.fromEnvironment('SUPABASE_URL');

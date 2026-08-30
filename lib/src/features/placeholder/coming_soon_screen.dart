@@ -41,11 +41,7 @@ class ComingSoonScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                size: 56,
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
+              Icon(icon, size: 56, color: theme.colorScheme.onSurfaceVariant),
               const SizedBox(height: AppSpacing.lg),
               Text(
                 description,
