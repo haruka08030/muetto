@@ -13,19 +13,7 @@
 **Phase 1（香水 DB と検索）まで実装済み**。認証・DB スキーマ・香料マスタ・
 取り込みパイプライン・香水検索・香水詳細まで。
 残るのは本番データの投入（公式サイトと EC の公式 API の資格情報が要る）。
-試香ログ・好み分析は Phase 2 以降（[docs/roadmap.md](docs/roadmap.md)）。
-
-## ドキュメント
-
-| ドキュメント | 内容 |
-|---|---|
-| [docs/requirements.md](docs/requirements.md) | 要件定義書（コア。機能要件・非機能要件・スコープ） |
-| [docs/screens.md](docs/screens.md) | 画面一覧と主要導線 |
-| [docs/data-model.md](docs/data-model.md) | データモデル・DBスキーマ・RLS方針 |
-| [docs/preference-algorithm.md](docs/preference-algorithm.md) | 好み分析・レコメンドのアルゴリズム仕様 |
-| [docs/data-ingestion.md](docs/data-ingestion.md) | 香水マスタDBの構築・運用方針 |
-| [docs/roadmap.md](docs/roadmap.md) | 開発フェーズとマイルストーン |
-| [docs/decisions.md](docs/decisions.md) | 意思決定ログ（ADR） |
+試香ログ・好み分析は Phase 2 以降。
 
 ## 技術スタック
 
@@ -46,7 +34,6 @@ supabase/
   tests/             RLS ポリシーの検証
 tools/ingestion/     香水マスタの取り込み・正規化パイプライン
 scripts/             検証スクリプト
-docs/                要件定義・設計
 ```
 
 ## セットアップ
