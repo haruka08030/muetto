@@ -53,7 +53,10 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             FilledButton.icon(
-              onPressed: () => context.push(Routes.search),
+              // 検索はタブなので、ホームの上に積まず検索タブへ移す。
+              // push すると下のタブバーの選択と食い違う。
+              onPressed: () =>
+                  StatefulNavigationShell.of(context).goBranch(Tabs.search),
               icon: const Icon(Icons.search),
               label: const Text('香水を検索する'),
             ),
