@@ -37,7 +37,9 @@
 ## ディレクトリ構成
 
 ```
-app/                 Flutter アプリ
+lib/                 Flutter アプリのコード
+test/                アプリのテスト
+ios/ android/        プラットフォーム雛形
 supabase/
   migrations/        DB スキーマ
   seed/              香料・香調マスタのシード（生成物）
@@ -55,15 +57,15 @@ cd x-to-notion
 ./scripts/setup.sh
 ```
 
-必要なツールを確認し、Flutter のプラットフォーム雛形（`app/ios`, `app/android`）を
+必要なツールを確認し、Flutter のプラットフォーム雛形（`ios/`, `android/`）を
 生成して依存を取得する。冪等なので何度実行してもよい。
 
-`app/ios` と `app/android` はリポジトリに含めていない。
+`ios/` と `android/` はリポジトリに含めていない。
 Bundle ID がプロダクト名に依存するため、名前が確定するまで固定したくないから。
 確定したら次のように生成し直す。
 
 ```bash
-rm -rf app/ios app/android
+rm -rf ios android
 ORG=com.yourorg PROJECT_NAME=yourapp ./scripts/setup.sh
 ```
 
@@ -77,15 +79,51 @@ ORG=com.yourorg PROJECT_NAME=yourapp ./scripts/setup.sh
 
 ### 接続情報
 
-`app/.env.example` を参照。`--dart-define` で渡す。
-クライアントに置いてよいのは公開鍵のみで、service_role key は入れない。
+`.env.example` を参照。クライアントに置いてよいのは公開鍵のみで、
+service_role key は入れない（`.env` はアプリバンドルに同梱されるため）。
+
+ローカル開発では `.env` に置けばそのまま読まれる。
 
 ```bash
-cd app
+cp .env.example .env   # 値を書き込む
+flutter run
+```
+
+CI やリリースビルドでは `--dart-define` で渡す。こちらが `.env` より優先される。
+
+```bash
 flutter run \
   --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
+
+### ゲスト閲覧（開発用）
+
+ログインせずにカタログを見たいときは `GUEST_MODE` を有効にする。
+サインイン画面に「ログインせずに見る」が出る。
+
+```bash
+flutter run --dart-define=GUEST_MODE=true
+```
+
+既定は無効で、リリースビルドには導線が出ない。
+カタログは RLS が `select using (true)` のため未ログインでも読めるが、
+試香ログなど書き込みが要る機能はゲストでは使えない。
+
+DB を用意しただけでは香水レコードが無く、検索結果が空になる。
+開発用のフィクスチャを入れる:
+
+```bash
+cd tools/ingestion
+python3 -m ingestion.sources.dev_fixture --limit 2000
+cd ../..
+supabase db query --linked --file tools/ingestion/.local/dev_perfumes.sql
+supabase db query --linked \
+  "select * from merge_staging_batch('d0000000-0000-4000-8000-000000000001', true);"
+```
+
+生成物は `tools/ingestion/.local/` に出る（`.gitignore` 済み）。
+バッチ ID は固定なので、何度でも入れ直せる。
 
 ## 検証
 
@@ -93,7 +131,7 @@ flutter run \
 ./scripts/db_test.sh                  # マイグレーション・シード・RLS を実際の Postgres で検証
 python scripts/check_consistency.py   # 生成データとアプリコードの整合性
 cd tools/ingestion && python -m pytest tests/ -q
-cd app && flutter analyze && flutter test
+flutter analyze && flutter test
 ```
 
 ## ローカル開発時のデータ投入

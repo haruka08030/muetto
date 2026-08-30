@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/env.dart';
 import '../../theme/app_theme.dart';
 import 'auth_controller.dart';
 
@@ -129,6 +130,20 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         _isSignUp ? 'すでにアカウントをお持ちの方はこちら' : 'アカウントを新規作成する',
                       ),
                     ),
+                    // 開発用。GUEST_MODE が無効なリリースビルドでは出ない。
+                    if (Env.guestModeEnabled) ...[
+                      const SizedBox(height: AppSpacing.md),
+                      const Divider(),
+                      const SizedBox(height: AppSpacing.sm),
+                      OutlinedButton.icon(
+                        onPressed: state.isLoading
+                            ? null
+                            : () =>
+                                  ref.read(guestModeProvider.notifier).enter(),
+                        icon: const Icon(Icons.visibility_outlined),
+                        label: const Text('ログインせずに見る（開発用）'),
+                      ),
+                    ],
                   ],
                 ),
               ),

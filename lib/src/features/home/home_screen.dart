@@ -14,6 +14,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final session = ref.watch(authStateProvider).value;
+    final isGuest = ref.watch(guestModeProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -21,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            tooltip: 'ログアウト',
+            tooltip: isGuest ? 'ゲスト閲覧をやめる' : 'ログアウト',
             onPressed: () =>
                 ref.read(authControllerProvider.notifier).signOut(),
           ),
@@ -33,7 +34,9 @@ class HomeScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ログイン中: ${session?.user.email ?? '-'}',
+              isGuest
+                  ? 'ゲストとして閲覧中（記録の保存はできません）'
+                  : 'ログイン中: ${session?.user.email ?? '-'}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: AppSpacing.lg),

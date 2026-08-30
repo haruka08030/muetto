@@ -20,6 +20,9 @@ dependencies:
   # バックエンド
   supabase_flutter: ^2.5.11
 
+  # 実行時設定。.env を読む（--dart-define が優先）
+  flutter_dotenv: ^6.0.1
+
   # intl はここで宣言しない。
   # flutter_localizations（SDK 同梱）が intl のバージョンを固定するため、
   # 直接宣言すると SDK 更新のたびに解決が衝突する。
@@ -32,3 +35,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  # .env はアプリバンドルに同梱されるため、公開鍵のみを置くこと。
+  # service_role key は絶対に入れない。
+  assets:
+    - .env

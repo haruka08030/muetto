@@ -47,7 +47,7 @@ if [ "$missing" -ne 0 ]; then
 fi
 
 step "Flutter プラットフォームの雛形を生成"
-cd "$ROOT/app"
+cd "$ROOT"
 if [ -d ios ] && [ -d android ]; then
   ok "ios/ と android/ は生成済み"
 else
@@ -58,7 +58,8 @@ else
 
   # flutter create が置いていくテンプレートを消す。
   # widget_test.dart は存在しないクラスを参照するため flutter analyze が落ちる。
-  rm -f test/widget_test.dart README.md ./*.iml
+  # ルート直下で実行するため README.md は消さない（プロジェクトの README を守る）。
+  rm -f test/widget_test.dart ./*.iml
   ok "テンプレートの残骸を削除"
 fi
 
@@ -79,7 +80,7 @@ cd "$ROOT"
 echo "  ./scripts/db_test.sh                 DB マイグレーション・RLS の検証（要 PostgreSQL）"
 echo "  python3 scripts/check_consistency.py  生成データとアプリコードの整合性"
 echo "  (cd tools/ingestion && python3 -m pytest tests/ -q)"
-echo "  (cd app && flutter analyze && flutter test)"
+echo "  flutter analyze && flutter test"
 
 step "次にやること"
 cat <<'NEXT'
@@ -97,7 +98,6 @@ cat <<'NEXT'
        psql "$DATABASE_URL" -c "select * from merge_staging_batch('d0000000-0000-4000-8000-000000000001', true);"
 
   4. アプリを起動
-       cd app
        flutter run \
          --dart-define=SUPABASE_URL=https://xxxx.supabase.co \
          --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...

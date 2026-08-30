@@ -18,6 +18,8 @@ abstract final class Routes {
 final routerProvider = Provider<GoRouter>((ref) {
   // 認証状態が変わったらルーターに再評価させる。
   final authState = ref.watch(authStateProvider);
+  // ゲスト閲覧の開始・終了でも再評価させる。
+  final isGuest = ref.watch(guestModeProvider);
 
   return GoRouter(
     initialLocation: Routes.home,
@@ -26,13 +28,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       if (authState.isLoading) {
         return null;
       }
-      final signedIn = authState.value != null;
+      // ゲストはログイン済みと同じ扱いで通す。
+      // 書き込みが要る機能は RLS 側で弾かれる。
+      final canBrowse = authState.value != null || isGuest;
       final atSignIn = state.matchedLocation == Routes.signIn;
 
-      if (!signedIn && !atSignIn) {
+      if (!canBrowse && !atSignIn) {
         return Routes.signIn;
       }
-      if (signedIn && atSignIn) {
+      if (canBrowse && atSignIn) {
         return Routes.home;
       }
       return null;

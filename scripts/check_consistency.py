@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ACCORDS_CSV = ROOT / "tools" / "ingestion" / "data" / "accords_master.csv"
 NOTES_CSV = ROOT / "tools" / "ingestion" / "data" / "notes_master.csv"
-ACCORD_COLORS = ROOT / "app" / "lib" / "src" / "theme" / "accord_colors.dart"
+ACCORD_COLORS = ROOT / "lib" / "src" / "theme" / "accord_colors.dart"
 SEED_SQL = ROOT / "supabase" / "seed" / "0001_notes_accords.sql"
 
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
