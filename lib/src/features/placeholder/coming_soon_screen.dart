@@ -12,6 +12,7 @@ class ComingSoonScreen extends StatelessWidget {
     required this.phase,
     required this.description,
     required this.icon,
+    this.showAppBar = true,
     super.key,
   });
 
@@ -25,12 +26,15 @@ class ComingSoonScreen extends StatelessWidget {
 
   final IconData icon;
 
+  /// 内タブの中で使うときは、外側が AppBar を持つので出さない。
+  final bool showAppBar;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: showAppBar ? AppBar(title: Text(title)) : null,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.xl),

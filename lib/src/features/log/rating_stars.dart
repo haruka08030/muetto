@@ -135,3 +135,53 @@ class RatingValue extends StatelessWidget {
     );
   }
 }
+
+
+/// 読み取り専用の星。一覧やカードで評価を出すために使う。
+///
+/// 入力用の [RatingStars] とは別にする。あちらは指の位置を計算するために
+/// 固定幅が要るが、こちらは行に収まる大きさで並べたいだけ。
+class RatingStarsDisplay extends StatelessWidget {
+  const RatingStarsDisplay({
+    required this.rating,
+    this.size = 16,
+    super.key,
+  });
+
+  final double rating;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var i = 0; i < 5; i++)
+          SizedBox(
+            width: size,
+            height: size,
+            child: Stack(
+              children: [
+                Icon(
+                  Icons.star,
+                  size: size,
+                  color: scheme.surfaceContainerHighest,
+                ),
+                ClipRect(
+                  clipper: _FillClipper((rating - i).clamp(0.0, 1.0)),
+                  child: Icon(Icons.star, size: size, color: scheme.primary),
+                ),
+              ],
+            ),
+          ),
+        const SizedBox(width: 6),
+        Text(
+          rating.toStringAsFixed(1),
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
+      ],
+    );
+  }
+}

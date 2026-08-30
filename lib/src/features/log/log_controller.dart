@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/tasting_log_repository.dart';
+import 'log_list_controller.dart';
 
 /// ログ保存の進行状態。画面はこれを見てボタンを止める。
 final logControllerProvider =
@@ -28,8 +29,15 @@ class LogController extends Notifier<AsyncValue<void>> {
         wantToBuy: wantToBuy,
       ),
     );
-    state = result.hasError ? AsyncError(result.error!, StackTrace.current)
-                            : const AsyncData(null);
+    state = result.hasError
+        ? AsyncError(result.error!, StackTrace.current)
+        : const AsyncData(null);
+
+    if (!result.hasError) {
+      // 保存したものが一覧にすぐ出るようにする。
+      ref.invalidate(logListProvider);
+      ref.invalidate(logsForPerfumeProvider(perfumeId));
+    }
     return !result.hasError;
   }
 }

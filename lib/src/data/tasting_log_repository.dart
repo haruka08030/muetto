@@ -39,6 +39,51 @@ class TastingLogRepository {
     return TastingLog.fromJson(row);
   }
 
+  /// 自分のログを一覧で取る。
+  ///
+  /// 香水名を出すために perfumes と brands を結合する。件数ぶん往復すると
+  /// 遅いので、DB 側で 1 回にまとめる。RLS が user_id = auth.uid() で
+  /// 絞るため、ここで user_id を条件に足す必要はない。
+  Future<List<TastingLogWithPerfume>> list({
+    LogSort sort = LogSort.recent,
+    String? perfumeId,
+    int limit = 30,
+    int offset = 0,
+  }) async {
+    var query = supabase
+        .from('tasting_logs')
+        .select(
+          'id, perfume_id, rating, memo, tested_at, method, want_to_buy, '
+          'perfumes!inner(id, name_en, name_ja, concentration, release_year, '
+          'image_url, is_verified, brands!inner(name_en, name_ja))',
+        );
+
+    // 香水別に見るとき（S-09 の「香水別」）。
+    if (perfumeId != null) {
+      query = query.eq('perfume_id', perfumeId);
+    }
+
+    final rows = await switch (sort) {
+      // 同じ日に複数付けたときのために created_at を第二キーにする。
+      LogSort.recent => query
+          .order('tested_at', ascending: false)
+          .order('created_at', ascending: false),
+      LogSort.rating => query
+          .order('rating', ascending: false)
+          .order('tested_at', ascending: false),
+    }.range(offset, offset + limit - 1);
+
+    return rows
+        .cast<Map<String, dynamic>>()
+        .map(TastingLogWithPerfume.fromJson)
+        .toList();
+  }
+
+  /// ログを消す。RLS が自分のものだけに絞る。
+  Future<void> delete(String logId) async {
+    await supabase.from('tasting_logs').delete().eq('id', logId);
+  }
+
   /// tested_at は date 型なので、時刻を落として渡す。
   static String _dateOnly(DateTime value) =>
       '${value.year.toString().padLeft(4, '0')}-'

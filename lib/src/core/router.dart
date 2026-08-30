@@ -6,6 +6,7 @@ import '../features/auth/auth_controller.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/perfume/perfume_detail_screen.dart';
+import '../features/collection/collection_screen.dart';
 import '../features/log/pick_perfume_screen.dart';
 import '../features/placeholder/coming_soon_screen.dart';
 import '../features/search/search_screen.dart';
@@ -85,12 +86,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           _branch(
             Routes.collection,
-            (context, state) => const ComingSoonScreen(
-              title: 'コレクション',
-              phase: 2,
-              description: '持っている香水と残量を管理できるようにします。',
-              icon: Icons.style_outlined,
-            ),
+            (context, state) => const CollectionScreen(),
           ),
           _branch(
             Routes.analysis,
