@@ -39,6 +39,7 @@ class LogController extends Notifier<AsyncValue<void>> {
     if (!result.hasError) {
       // 保存したものが一覧にすぐ出るようにする。
       ref.invalidate(logListProvider);
+      ref.invalidate(recentLogsProvider);
       ref.invalidate(logsForPerfumeProvider(perfumeId));
     }
     return !result.hasError;

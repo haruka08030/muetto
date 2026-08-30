@@ -34,3 +34,13 @@ final logsForPerfumeProvider =
     ) async {
       return ref.read(tastingLogRepositoryProvider).list(perfumeId: perfumeId);
     });
+
+/// ホームに出す直近のログ。
+///
+/// 一覧（[logListProvider]）とは件数が違うだけだが、
+/// ホームを開くたびに 30 件取るのは無駄なので別に持つ。
+final recentLogsProvider = FutureProvider<List<TastingLogWithPerfume>>((
+  ref,
+) async {
+  return ref.read(tastingLogRepositoryProvider).list(limit: 3);
+});
