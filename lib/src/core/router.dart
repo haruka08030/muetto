@@ -6,6 +6,7 @@ import '../features/auth/auth_controller.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/perfume/perfume_detail_screen.dart';
+import '../features/log/pick_perfume_screen.dart';
 import '../features/placeholder/coming_soon_screen.dart';
 import '../features/search/search_screen.dart';
 import '../features/shell/app_shell.dart';
@@ -80,12 +81,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           _branch(Routes.search, (context, state) => const SearchScreen()),
           _branch(
             Routes.log,
-            (context, state) => const ComingSoonScreen(
-              title: 'ログを書く',
-              phase: 2,
-              description: '試香したその場で、評価とメモを残せるようにします。',
-              icon: Icons.edit_note_outlined,
-            ),
+            (context, state) => const PickPerfumeScreen(),
           ),
           _branch(
             Routes.collection,
