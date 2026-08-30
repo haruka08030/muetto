@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../log/log_list_screen.dart';
-import '../placeholder/coming_soon_screen.dart';
+import 'collection_items_view.dart';
+import 'wishlist_view.dart';
 
 /// 自分の記録をまとめる場所。
 ///
@@ -31,20 +32,8 @@ class CollectionScreen extends StatelessWidget {
           children: [
             // ログ一覧は自前で AppBar を持つので、ここでは中身だけ使う。
             LogListView(),
-            ComingSoonScreen(
-              title: '所持品',
-              phase: 2,
-              description: '持っている香水と残量を管理できるようにします。',
-              icon: Icons.style_outlined,
-              showAppBar: false,
-            ),
-            ComingSoonScreen(
-              title: '欲しいもの',
-              phase: 2,
-              description: '気になる香水を優先度付きで残せるようにします。',
-              icon: Icons.favorite_outline,
-              showAppBar: false,
-            ),
+            CollectionItemsView(),
+            WishlistView(),
           ],
         ),
       ),

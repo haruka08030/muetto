@@ -6,6 +6,7 @@ import '../../models/localized.dart';
 import '../../models/perfume.dart';
 import '../../theme/accord_colors.dart';
 import '../../theme/app_theme.dart';
+import '../collection/add_actions.dart';
 
 class PerfumeDetailScreen extends ConsumerWidget {
   const PerfumeDetailScreen({required this.perfumeId, super.key});
@@ -39,16 +40,17 @@ class PerfumeDetailScreen extends ConsumerWidget {
             ),
           ),
         ),
-        data: (data) => _Content(detail: data),
+        data: (data) => _Content(detail: data, perfumeId: perfumeId),
       ),
     );
   }
 }
 
 class _Content extends StatelessWidget {
-  const _Content({required this.detail});
+  const _Content({required this.detail, required this.perfumeId});
 
   final PerfumeDetail detail;
+  final String perfumeId;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,9 @@ class _Content extends StatelessWidget {
           localizedName(nameEn: p.nameEn, nameJa: p.nameJa),
           style: theme.textTheme.headlineSmall,
         ),
-        const SizedBox(height: AppSpacing.sm),
+        const SizedBox(height: AppSpacing.md),
+        AddToCollectionActions(perfumeId: perfumeId),
+        const SizedBox(height: AppSpacing.md),
         Wrap(
           spacing: AppSpacing.sm,
           runSpacing: AppSpacing.xs,
