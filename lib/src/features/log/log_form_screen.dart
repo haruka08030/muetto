@@ -13,19 +13,38 @@ import 'rating_stars.dart';
 /// 店頭で使うので、星をタップした時点で保存できる状態にする。
 /// メモも方法も必須にしない（docs/screens.md 3）。
 class LogFormScreen extends ConsumerStatefulWidget {
-  const LogFormScreen({required this.perfume, super.key});
+  const LogFormScreen({required this.perfume, this.existing, super.key});
 
   final PerfumeSummary perfume;
+
+  /// 渡すと書き換えになる。null なら新規。
+  final TastingLog? existing;
 
   @override
   ConsumerState<LogFormScreen> createState() => _LogFormScreenState();
 }
 
 class _LogFormScreenState extends ConsumerState<LogFormScreen> {
-  final _memo = TextEditingController();
-  double _rating = 0;
+  late final TextEditingController _memo;
+  late double _rating;
   TastingMethod? _method;
-  bool _wantToBuy = false;
+  late bool _wantToBuy;
+
+  bool get _isEditing => widget.existing != null;
+
+  @override
+  void initState() {
+    super.initState();
+    final existing = widget.existing;
+    _memo = TextEditingController(text: existing?.memo ?? '');
+    _rating = existing?.rating ?? 0;
+    _wantToBuy = existing?.wantToBuy ?? false;
+    _method = existing?.method == null
+        ? null
+        : TastingMethod.values
+              .where((m) => m.value == existing!.method)
+              .firstOrNull;
+  }
 
   @override
   void dispose() {
@@ -36,15 +55,25 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
   bool get _canSave => _rating > 0;
 
   Future<void> _save() async {
-    final saved = await ref
-        .read(logControllerProvider.notifier)
-        .save(
-          perfumeId: widget.perfume.id,
-          rating: _rating,
-          memo: _memo.text,
-          method: _method?.value,
-          wantToBuy: _wantToBuy,
-        );
+    final controller = ref.read(logControllerProvider.notifier);
+    final existing = widget.existing;
+
+    final saved = existing == null
+        ? await controller.save(
+            perfumeId: widget.perfume.id,
+            rating: _rating,
+            memo: _memo.text,
+            method: _method?.value,
+            wantToBuy: _wantToBuy,
+          )
+        : await controller.update(
+            logId: existing.id,
+            perfumeId: widget.perfume.id,
+            rating: _rating,
+            memo: _memo.text,
+            method: _method?.value,
+            wantToBuy: _wantToBuy,
+          );
 
     if (!saved || !mounted) {
       return;
@@ -66,7 +95,7 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('試香ログ'),
+        title: Text(_isEditing ? 'ログを編集' : '試香ログ'),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.of(context).pop(false),
@@ -126,9 +155,14 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
             title: const Text('買いたい'),
             contentPadding: EdgeInsets.zero,
           ),
-          const SizedBox(height: AppSpacing.lg),
-
-          FilledButton(
+        ],
+      ),
+      // 保存は常に押せる場所に置く。一覧の中に入れると、
+      // 内容が伸びたときに画面外へ出てスクロールが要る。
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: FilledButton(
             onPressed: (!_canSave || state.isLoading) ? null : _save,
             child: state.isLoading
                 ? const SizedBox(
@@ -136,9 +170,9 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
                     width: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Text('保存する'),
+                : Text(_isEditing ? '更新する' : '保存する'),
           ),
-        ],
+        ),
       ),
     );
   }

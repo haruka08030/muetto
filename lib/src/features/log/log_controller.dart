@@ -44,4 +44,37 @@ class LogController extends Notifier<AsyncValue<void>> {
     }
     return !result.hasError;
   }
+
+  /// 既存のログを書き換える。保存できたら true。
+  Future<bool> update({
+    required String logId,
+    required String perfumeId,
+    required double rating,
+    required String? memo,
+    required String? method,
+    required bool wantToBuy,
+  }) async {
+    state = const AsyncLoading();
+    final result = await AsyncValue.guard(
+      () => ref
+          .read(tastingLogRepositoryProvider)
+          .update(
+            logId: logId,
+            rating: rating,
+            memo: memo,
+            method: method,
+            wantToBuy: wantToBuy,
+          ),
+    );
+    state = result.hasError
+        ? AsyncError(result.error!, StackTrace.current)
+        : const AsyncData(null);
+
+    if (!result.hasError) {
+      ref.invalidate(logListProvider);
+      ref.invalidate(recentLogsProvider);
+      ref.invalidate(logsForPerfumeProvider(perfumeId));
+    }
+    return !result.hasError;
+  }
 }

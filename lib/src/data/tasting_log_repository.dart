@@ -81,6 +81,33 @@ class TastingLogRepository {
         .toList();
   }
 
+  /// ログを書き換える。RLS が自分のものだけに絞る。
+  ///
+  /// memo と method は空にできる必要がある。省略と「消した」を
+  /// 区別するため、呼び出し側は必ず両方を渡す。
+  Future<void> update({
+    required String logId,
+    required double rating,
+    required String? memo,
+    required String? method,
+    required bool wantToBuy,
+  }) async {
+    final trimmedMemo = memo?.trim();
+
+    await supabase
+        .from('tasting_logs')
+        .update({
+          'rating': rating,
+          'memo': (trimmedMemo == null || trimmedMemo.isEmpty)
+              ? null
+              : trimmedMemo,
+          'method': method,
+          'want_to_buy': wantToBuy,
+          'updated_at': DateTime.now().toIso8601String(),
+        })
+        .eq('id', logId);
+  }
+
   /// ログを消す。RLS が自分のものだけに絞る。
   Future<void> delete(String logId) async {
     await supabase.from('tasting_logs').delete().eq('id', logId);

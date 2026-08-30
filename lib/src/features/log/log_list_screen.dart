@@ -5,6 +5,7 @@ import '../../data/tasting_log_repository.dart';
 import '../../models/localized.dart';
 import '../../models/tasting_log.dart';
 import '../../theme/app_theme.dart';
+import 'log_form_screen.dart';
 import 'log_list_controller.dart';
 import 'rating_stars.dart';
 
@@ -128,6 +129,7 @@ class _LogTile extends ConsumerWidget {
       confirmDismiss: (direction) => _confirmDelete(context),
       onDismissed: (direction) => _delete(ref),
       child: ListTile(
+        onTap: () => _openEdit(context),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.sm,
@@ -185,6 +187,18 @@ class _LogTile extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  /// 一覧から書き換える。フォームは新規と同じものを使い回す。
+  Future<void> _openEdit(BuildContext context) async {
+    await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) =>
+            LogFormScreen(perfume: item.perfume, existing: item.log),
+      ),
+    );
+    // 更新はコントローラ側で一覧を読み直すので、ここでは何もしない。
   }
 
   Future<bool> _confirmDelete(BuildContext context) async {
