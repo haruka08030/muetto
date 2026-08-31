@@ -12,25 +12,14 @@ final authStateProvider = StreamProvider<Session?>((ref) {
   return supabase.auth.onAuthStateChange.map((event) => event.session);
 });
 
-/// ゲストとして閲覧中か。
+/// 匿名で始めているか。
 ///
-/// 開発用の GUEST_MODE が有効なときだけ true になりうる。
-/// 無効時は常に false のままなので、リリースビルドの導線は変わらない。
-final guestModeProvider = NotifierProvider<GuestModeController, bool>(
-  GuestModeController.new,
-);
-
-class GuestModeController extends Notifier<bool> {
-  @override
-  bool build() => false;
-
-  void enter() {
-    if (!Env.guestModeEnabled) return;
-    state = true;
-  }
-
-  void exit() => state = false;
-}
+/// 匿名サインインでも実際のセッションができるので、[authStateProvider]
+/// だけではログイン済みと区別が付かない。表示を変えるためにここで覚える。
+final isAnonymousProvider = Provider<bool>((ref) {
+  final session = ref.watch(authStateProvider).value;
+  return session?.user.isAnonymous ?? false;
+});
 
 final authControllerProvider =
     NotifierProvider<AuthController, AsyncValue<void>>(AuthController.new);
@@ -59,10 +48,20 @@ class AuthController extends Notifier<AsyncValue<void>> {
     );
   }
 
+  /// 匿名で始める。開発中に全機能を触るための入口。
+  ///
+  /// 実際のセッションを作るので、ログもコレクションも本番と同じ経路で
+  /// 動く。GUEST_MODE が無効なら何もしない。
+  Future<void> signInAnonymously() async {
+    if (!Env.guestModeEnabled) {
+      return;
+    }
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() => supabase.auth.signInAnonymously());
+  }
+
   Future<void> signOut() async {
     state = const AsyncLoading();
-    // ゲスト閲覧も同時に解除する。解除しないとサインイン画面に戻れない。
-    ref.read(guestModeProvider.notifier).exit();
     state = await AsyncValue.guard(() => supabase.auth.signOut());
   }
 }

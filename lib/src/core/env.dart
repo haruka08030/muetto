@@ -8,13 +8,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class Env {
   const Env({required this.supabaseUrl, required this.supabasePublishableKey});
 
-  /// ログインを省略してカタログを閲覧できるようにするか。
+  /// サインイン画面を通らずに匿名で始められるようにするか。
   ///
-  /// 開発・動作確認用。`--dart-define=GUEST_MODE=true` でのみ有効になり、
-  /// 既定は false なのでリリースビルドには影響しない。
-  /// カタログ（brands/perfumes/notes/accords）は RLS が
-  /// `select using (true)` のため未ログインでも読める。
-  /// 一方ログインが要る機能（試香ログ等）はゲストでは使えない。
+  /// `--dart-define=GUEST_MODE=true` でのみ有効。既定は false なので
+  /// リリースビルドの導線は変わらない。
+  ///
+  /// 匿名サインインは Supabase 側の実際のセッションを作る。`auth.uid()`
+  /// が実在するので RLS は通常どおり効き、ログもコレクションも本番と
+  /// 同じ経路で動く。以前は UI だけ開けていたが、それでは RLS で弾かれ、
+  /// 開発中の確認にならなかった。
   static const bool guestModeEnabled = bool.fromEnvironment('GUEST_MODE');
 
   /// `--dart-define` を優先し、未指定の項目のみ `.env` で補う。

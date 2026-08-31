@@ -138,10 +138,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       OutlinedButton.icon(
                         onPressed: state.isLoading
                             ? null
-                            : () =>
-                                  ref.read(guestModeProvider.notifier).enter(),
+                            : () => ref
+                                  .read(authControllerProvider.notifier)
+                                  .signInAnonymously(),
                         icon: const Icon(Icons.visibility_outlined),
-                        label: const Text('ログインせずに見る（開発用）'),
+                        label: const Text('ログインせずに使う（開発用）'),
                       ),
                     ],
                   ],

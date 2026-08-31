@@ -45,9 +45,6 @@ final _rootKey = GlobalKey<NavigatorState>();
 final routerProvider = Provider<GoRouter>((ref) {
   // 認証状態が変わったらルーターに再評価させる。
   final authState = ref.watch(authStateProvider);
-  // ゲスト閲覧の開始・終了でも再評価させる。
-  final isGuest = ref.watch(guestModeProvider);
-
   return GoRouter(
     navigatorKey: _rootKey,
     initialLocation: Routes.home,
@@ -56,9 +53,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       if (authState.isLoading) {
         return null;
       }
-      // ゲストはログイン済みと同じ扱いで通す。
-      // 書き込みが要る機能は RLS 側で弾かれる。
-      final canBrowse = authState.value != null || isGuest;
+      // 匿名でもセッションはできるので、ここで区別する必要はない。
+      final canBrowse = authState.value != null;
       final atSignIn = state.matchedLocation == Routes.signIn;
 
       if (!canBrowse && !atSignIn) {

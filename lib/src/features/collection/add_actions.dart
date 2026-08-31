@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/collection_repository.dart';
 import '../../models/collection.dart';
 import '../../theme/app_theme.dart';
-import '../auth/auth_controller.dart';
 import 'collection_controller.dart';
 
 /// 香水詳細に置く「持っている」「欲しい」。
@@ -18,11 +17,6 @@ class AddToCollectionActions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ゲストは RLS で弾かれる。押せるのに保存されない状態を作らない。
-    if (ref.watch(guestModeProvider)) {
-      return const SizedBox.shrink();
-    }
-
     return Row(
       children: [
         Expanded(

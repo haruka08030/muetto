@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:muetto/src/features/home/home_screen.dart';
+import 'package:muetto/src/features/auth/auth_controller.dart';
+import 'package:muetto/src/features/log/draft_sync.dart';
 import 'package:muetto/src/features/log/log_list_controller.dart';
 import 'package:muetto/src/models/tasting_log.dart';
 
-/// ホームは認証状態で出すものが変わる。
-/// ゲストは記録を読めないので、代わりに何ができるかを伝える。
+/// ホームは最近の記録を出す。認証まわりは Supabase を初期化しないと
+/// 触れないので、テストでは差し替えて表示だけを見る。
 void main() {
   Future<void> pumpHome(
     WidgetTester tester, {
@@ -14,7 +16,14 @@ void main() {
   }) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [recentLogsProvider.overrideWith((ref) async => logs)],
+        overrides: [
+          recentLogsProvider.overrideWith((ref) async => logs),
+          // ホームは認証状態と下書きを見る。どちらも Supabase に触るので、
+          // テストではその手前で差し替える。
+          authStateProvider.overrideWith((ref) => const Stream.empty()),
+          draftsProvider.overrideWith((ref) async => []),
+          draftSyncProvider.overrideWith(() => _NoSync()),
+        ],
         child: const MaterialApp(home: HomeScreen()),
       ),
     );
@@ -55,3 +64,9 @@ TastingLogWithPerfume _item() => TastingLogWithPerfume.fromJson({
     'brands': {'name_en': 'Maison Hikari', 'name_ja': 'メゾン・ヒカリ'},
   },
 });
+
+/// 同期を止めるための差し替え。テストでは送信も再取得もしない。
+class _NoSync extends DraftSync {
+  @override
+  Future<int> flush() async => 0;
+}

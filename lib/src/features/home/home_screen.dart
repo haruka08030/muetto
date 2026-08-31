@@ -29,15 +29,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // 溜まっている下書きを送る。ホームは必ず通るので、
     // ここに置けば起動専用の画面を作らずに済む。
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!ref.read(guestModeProvider)) {
-        ref.read(draftSyncProvider.notifier).flush();
-      }
+      ref.read(draftSyncProvider.notifier).flush();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final isGuest = ref.watch(guestModeProvider);
+    final isAnonymous = ref.watch(isAnonymousProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            tooltip: isGuest ? 'ゲスト閲覧をやめる' : 'ログアウト',
+            tooltip: isAnonymous ? 'やめる' : 'ログアウト',
             onPressed: () =>
                 ref.read(authControllerProvider.notifier).signOut(),
           ),
@@ -56,12 +54,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.lg),
           children: [
-            if (isGuest)
-              const _GuestNotice()
-            else ...[
-              const _PendingDrafts(),
-              const _RecentLogs(),
-            ],
+            if (isAnonymous) const _AnonymousNotice(),
+            const _PendingDrafts(),
+            const _RecentLogs(),
             const SizedBox(height: AppSpacing.lg),
             const _SearchAction(),
           ],
@@ -116,9 +111,12 @@ class _PendingDrafts extends ConsumerWidget {
   }
 }
 
-/// ゲストには記録が無い。何ができるかだけ伝える。
-class _GuestNotice extends StatelessWidget {
-  const _GuestNotice();
+/// 匿名で使っていることを伝える。
+///
+/// 記録は残るが、この端末のセッションに紐づく。消えては困るものは
+/// アカウントを作ってもらう必要がある。
+class _AnonymousNotice extends StatelessWidget {
+  const _AnonymousNotice();
 
   @override
   Widget build(BuildContext context) {
@@ -140,13 +138,13 @@ class _GuestNotice extends StatelessWidget {
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                Text('ゲストとして閲覧中', style: theme.textTheme.titleSmall),
+                Text('お試しで使っています', style: theme.textTheme.titleSmall),
               ],
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              '香水を探して詳細を見られます。\n'
-              '試香の記録を残すにはログインしてください。',
+              '記録は残りますが、この端末だけのものです。\n'
+              '残しておきたい場合はアカウントを作ってください。',
               style: theme.textTheme.bodyMedium,
             ),
           ],

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/router.dart';
 import '../../theme/app_theme.dart';
-import '../auth/auth_controller.dart';
 
 /// タブの外枠。ボトムナビゲーションと中央 FAB を持つ。
 ///
@@ -49,38 +48,17 @@ class AppShell extends ConsumerWidget {
     );
   }
 
-  /// タブを開く。ゲストのときは記録が要るタブを開かせない。
+  /// タブを開く。
+  ///
+  /// 匿名でも実際のセッションがあるので、どのタブも開ける。
+  /// 以前はゲストを記録系のタブから締め出していたが、匿名サインインに
+  /// してからは RLS が通常どおり効くため、分ける必要がなくなった。
   void _openTab(BuildContext context, WidgetRef ref, int index) {
-    if (_needsAccount(index) && ref.read(guestModeProvider)) {
-      _promptSignIn(context, ref);
-      return;
-    }
-
     // 同じタブをもう一度押したら、そのタブのルートまで戻す。
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
     );
-  }
-
-  /// ログインが要るタブか。
-  ///
-  /// ログ・コレクション・分析はいずれもユーザー自身のデータを読み書きする。
-  /// ゲストは RLS で弾かれるので、押しても何も起きない状態を作らない。
-  static bool _needsAccount(int index) => index >= Tabs.log;
-
-  void _promptSignIn(BuildContext context, WidgetRef ref) {
-    ScaffoldMessenger.of(context)
-      ..clearSnackBars()
-      ..showSnackBar(
-        SnackBar(
-          content: const Text('この機能を使うにはログインが必要です'),
-          action: SnackBarAction(
-            label: 'ログイン',
-            onPressed: () => ref.read(guestModeProvider.notifier).exit(),
-          ),
-        ),
-      );
   }
 }
 
