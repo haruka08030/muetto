@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/collection_repository.dart';
 import '../../data/draft_store.dart';
 import '../../data/tasting_log_repository.dart';
 import '../../models/log_draft.dart';
 import '../../models/perfume.dart';
-import '../collection/collection_controller.dart';
 import 'draft_sync.dart';
 import 'log_list_controller.dart';
 
@@ -45,23 +43,13 @@ class LogController extends Notifier<AsyncValue<void>> {
     required PerfumeSummary perfume,
     required double rating,
     String? memo,
-    bool wantToBuy = false,
   }) async {
     state = const AsyncLoading();
 
     try {
       await ref
           .read(tastingLogRepositoryProvider)
-          .create(
-            perfumeId: perfume.id,
-            rating: rating,
-            memo: memo,
-            wantToBuy: wantToBuy,
-          );
-
-      if (wantToBuy) {
-        await _addToWishlist(perfume.id);
-      }
+          .create(perfumeId: perfume.id, rating: rating, memo: memo);
 
       state = const AsyncData(null);
       ref.invalidate(logListProvider);
@@ -95,7 +83,6 @@ class LogController extends Notifier<AsyncValue<void>> {
               brandNameJa: perfume.brandNameJa,
               rating: rating,
               memo: memo,
-              wantToBuy: wantToBuy,
               createdAt: DateTime.now(),
             ),
           );
@@ -103,22 +90,6 @@ class LogController extends Notifier<AsyncValue<void>> {
       state = const AsyncData(null);
       ref.invalidate(draftsProvider);
       return LogSaveResult.draft;
-    }
-  }
-
-  /// 「買いたい」を立てたらウィッシュリストにも入れる
-  /// （docs/requirements.md 5.5）。
-  ///
-  /// これが失敗してもログの保存は取り消さない。本体はログのほうで、
-  /// 巻き戻すと入力そのものを失う。
-  Future<void> _addToWishlist(String perfumeId) async {
-    try {
-      await ref
-          .read(collectionRepositoryProvider)
-          .addToWishlist(perfumeId: perfumeId);
-      ref.invalidate(wishlistProvider);
-    } on Object {
-      return;
     }
   }
 
@@ -134,18 +105,12 @@ class LogController extends Notifier<AsyncValue<void>> {
     required String perfumeId,
     required double rating,
     required String? memo,
-    required bool wantToBuy,
   }) async {
     state = const AsyncLoading();
     final result = await AsyncValue.guard(
       () => ref
           .read(tastingLogRepositoryProvider)
-          .update(
-            logId: logId,
-            rating: rating,
-            memo: memo,
-            wantToBuy: wantToBuy,
-          ),
+          .update(logId: logId, rating: rating, memo: memo),
     );
     state = result.hasError
         ? AsyncError(result.error!, StackTrace.current)

@@ -21,7 +21,6 @@ void main() {
       });
 
       expect(log.memo, isNull);
-      expect(log.wantToBuy, isFalse);
     });
   });
 }

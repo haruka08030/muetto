@@ -73,7 +73,7 @@ class _Content extends StatelessWidget {
           style: theme.textTheme.headlineSmall,
         ),
         const SizedBox(height: AppSpacing.md),
-        AddToCollectionActions(perfumeId: perfumeId),
+        AddToCollectionActions(perfume: p),
         const SizedBox(height: AppSpacing.md),
         Wrap(
           spacing: AppSpacing.sm,

@@ -13,7 +13,6 @@ void main() {
         brandNameJa: 'メゾン・ヒカリ',
         rating: 4.2,
         memo: '朝つけたい',
-        wantToBuy: true,
         createdAt: DateTime.parse('2026-08-30T10:00:00.000'),
       );
 
@@ -22,7 +21,6 @@ void main() {
       expect(restored.id, draft.id);
       expect(restored.rating, draft.rating);
       expect(restored.memo, draft.memo);
-      expect(restored.wantToBuy, isTrue);
       expect(restored.createdAt, draft.createdAt);
       // 香水名を持っているので、電波が無くても一覧に出せる。
       expect(restored.perfumeNameJa, '柚子の朝');
@@ -42,7 +40,6 @@ void main() {
 
       expect(restored.memo, isNull);
       expect(restored.perfumeNameJa, isNull);
-      expect(restored.wantToBuy, isFalse);
     });
 
     test('保存が空でも壊れていても、起動を止めずに空で返す', () {

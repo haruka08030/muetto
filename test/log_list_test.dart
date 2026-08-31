@@ -10,7 +10,6 @@ void main() {
         'rating': 4.2,
         'tested_at': '2026-08-30',
         'memo': 'よかった',
-        'want_to_buy': true,
         'perfumes': {
           'id': 'p1',
           'name_en': 'Yuzu no Asa',
@@ -23,7 +22,6 @@ void main() {
 
       expect(item.log.rating, 4.2);
       expect(item.log.memo, 'よかった');
-      expect(item.log.wantToBuy, isTrue);
       expect(item.perfume.nameJa, '柚子の朝');
       // brands は入れ子なので、平らにして PerfumeSummary へ渡している。
       expect(item.perfume.brandNameEn, 'Maison Hikari');

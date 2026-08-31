@@ -164,14 +164,6 @@ class _LogTile extends ConsumerWidget {
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
-                if (log.wantToBuy) ...[
-                  const SizedBox(width: AppSpacing.sm),
-                  Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 14,
-                    color: theme.colorScheme.primary,
-                  ),
-                ],
               ],
             ),
             if (memo != null && memo.isNotEmpty) ...[

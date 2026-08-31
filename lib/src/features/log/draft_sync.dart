@@ -1,10 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/collection_repository.dart';
 import '../../data/draft_store.dart';
 import '../../data/tasting_log_repository.dart';
 import '../../models/log_draft.dart';
-import '../collection/collection_controller.dart';
 import 'log_list_controller.dart';
 
 /// 端末に残っている未送信のログ。
@@ -48,14 +46,9 @@ class DraftSync extends Notifier<AsyncValue<int>> {
               rating: draft.rating,
               memo: draft.memo,
               testedAt: draft.createdAt,
-              wantToBuy: draft.wantToBuy,
             );
         await store.remove(draft.id);
         sent++;
-
-        if (draft.wantToBuy) {
-          await _addToWishlist(draft.perfumeId);
-        }
       } on Object {
         // 送れなかったものは残す。次の機会に再び試す。
         continue;
@@ -70,21 +63,5 @@ class DraftSync extends Notifier<AsyncValue<int>> {
       ref.invalidate(draftsProvider);
     }
     return sent;
-  }
-
-  /// 「買いたい」を立てたらウィッシュリストにも入れる
-  /// （docs/requirements.md 5.5）。
-  ///
-  /// ここが失敗してもログの保存は取り消さない。
-  /// 本体はログで、こちらは付随なので、巻き戻すと損が大きい。
-  Future<void> _addToWishlist(String perfumeId) async {
-    try {
-      await ref
-          .read(collectionRepositoryProvider)
-          .addToWishlist(perfumeId: perfumeId);
-      ref.invalidate(wishlistProvider);
-    } on Object {
-      return;
-    }
   }
 }

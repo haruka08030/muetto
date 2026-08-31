@@ -8,7 +8,6 @@ class TastingLog {
     required this.rating,
     required this.testedAt,
     this.memo,
-    this.wantToBuy = false,
   });
 
   factory TastingLog.fromJson(Map<String, dynamic> json) => TastingLog(
@@ -18,7 +17,6 @@ class TastingLog {
     rating: _toDouble(json['rating']),
     memo: json['memo'] as String?,
     testedAt: DateTime.parse(json['tested_at'] as String),
-    wantToBuy: json['want_to_buy'] as bool? ?? false,
   );
 
   static double _toDouble(Object? value) => switch (value) {
@@ -35,8 +33,6 @@ class TastingLog {
 
   final String? memo;
   final DateTime testedAt;
-
-  final bool wantToBuy;
 }
 
 /// 一覧に出すための、ログと香水を組にしたもの。

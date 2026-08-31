@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../data/collection_repository.dart';
+import '../../core/router.dart';
+
 import '../../data/perfume_repository.dart';
 import '../../models/localized.dart';
 import '../../models/perfume.dart';
 import '../../theme/app_theme.dart';
-import '../collection/add_actions.dart';
-import '../collection/collection_controller.dart';
-import 'add_action_sheet.dart';
-import 'log_form_screen.dart';
 
 /// 追加する香水を選ぶ（中央 FAB の行き先）。
 ///
@@ -65,92 +63,12 @@ class _PickPerfumeScreenState extends ConsumerState<PickPerfumeScreen> {
     }
   }
 
-  /// 香水を選んだら、何をするかを尋ねてから進む。
-  Future<void> _pick(PerfumeSummary perfume) async {
-    final name = localizedName(nameEn: perfume.nameEn, nameJa: perfume.nameJa);
-    final action = await showAddActionSheet(context, name);
-    if (action == null || !mounted) {
-      return;
-    }
-
-    final added = switch (action) {
-      AddAction.tasted => await _openLogForm(perfume),
-      AddAction.owned => await _addToCollection(perfume),
-      AddAction.wanted => await _addToWishlist(perfume),
-    };
-
-    if (!added || !mounted) {
-      return;
-    }
-    await Navigator.of(context).maybePop();
-  }
-
-  Future<bool> _openLogForm(PerfumeSummary perfume) async {
-    final saved = await Navigator.of(context).push<bool>(
-      MaterialPageRoute(
-        fullscreenDialog: true,
-        builder: (context) => LogFormScreen(perfume: perfume),
-      ),
-    );
-    return saved ?? false;
-  }
-
-  Future<bool> _addToCollection(PerfumeSummary perfume) async {
-    final input = await showModalBottomSheet<CollectionInput>(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => const CollectionSheet(),
-    );
-    if (input == null) {
-      return false;
-    }
-
-    try {
-      await ref
-          .read(collectionRepositoryProvider)
-          .addItem(
-            perfumeId: perfume.id,
-            acquisitionType: input.type,
-            volumeMl: input.volumeMl,
-          );
-      ref.invalidate(collectionItemsProvider);
-      _toast('コレクションに追加しました');
-      return true;
-    } on Object catch (error) {
-      _toast('追加できませんでした: $error');
-      return false;
-    }
-  }
-
-  Future<bool> _addToWishlist(PerfumeSummary perfume) async {
-    final priority = await showModalBottomSheet<int>(
-      context: context,
-      builder: (context) => const PrioritySheet(),
-    );
-    if (priority == null) {
-      return false;
-    }
-
-    try {
-      await ref
-          .read(collectionRepositoryProvider)
-          .addToWishlist(perfumeId: perfume.id, priority: priority);
-      ref.invalidate(wishlistProvider);
-      _toast('欲しいものに追加しました');
-      return true;
-    } on Object catch (error) {
-      _toast('追加できませんでした: $error');
-      return false;
-    }
-  }
-
-  void _toast(String message) {
-    if (!mounted) {
-      return;
-    }
-    ScaffoldMessenger.of(context)
-      ..clearSnackBars()
-      ..showSnackBar(SnackBar(content: Text(message)));
+  /// 香水を選んだら詳細へ渡す。そこに試した・持ってる・欲しいがある。
+  ///
+  /// ここで何をするかを尋ねない。先に製品を見てから決めたいことが多く、
+  /// 選んだ直後に問うと、確かめる前に決めさせることになる。
+  void _open(PerfumeSummary perfume) {
+    context.push('${Routes.log}/${Routes.perfume}/${perfume.id}');
   }
 
   @override
@@ -215,7 +133,7 @@ class _PickPerfumeScreenState extends ConsumerState<PickPerfumeScreen> {
             ),
           ),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () => _pick(perfume),
+          onTap: () => _open(perfume),
         );
       },
     );

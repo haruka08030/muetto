@@ -45,7 +45,6 @@ void main() {
         'perfume_id': 'p1',
         'rating': 4.2,
         'memo': '朝つけたい',
-        'want_to_buy': true,
         'tested_at': '2026-08-30',
       }),
     );
@@ -56,8 +55,6 @@ void main() {
     expect(find.text('4.2'), findsOneWidget);
     expect(find.text('朝つけたい'), findsOneWidget);
 
-    final toggle = tester.widget<SwitchListTile>(find.byType(SwitchListTile));
-    expect(toggle.value, isTrue);
     expect(tester.takeException(), isNull);
   });
 

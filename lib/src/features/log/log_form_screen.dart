@@ -27,7 +27,6 @@ class LogFormScreen extends ConsumerStatefulWidget {
 class _LogFormScreenState extends ConsumerState<LogFormScreen> {
   late final TextEditingController _memo;
   late double _rating;
-  late bool _wantToBuy;
 
   bool get _isEditing => widget.existing != null;
 
@@ -37,7 +36,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
     final existing = widget.existing;
     _memo = TextEditingController(text: existing?.memo ?? '');
     _rating = existing?.rating ?? 0;
-    _wantToBuy = existing?.wantToBuy ?? false;
   }
 
   @override
@@ -60,7 +58,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
         perfumeId: widget.perfume.id,
         rating: _rating,
         memo: _memo.text,
-        wantToBuy: _wantToBuy,
       );
       if (updated && mounted) {
         Navigator.of(context).pop(true);
@@ -72,7 +69,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
       perfume: widget.perfume,
       rating: _rating,
       memo: _memo.text,
-      wantToBuy: _wantToBuy,
     );
 
     if (!mounted || result == LogSaveResult.failed) {
@@ -142,13 +138,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-
-          SwitchListTile(
-            value: _wantToBuy,
-            onChanged: (value) => setState(() => _wantToBuy = value),
-            title: const Text('買いたい'),
-            contentPadding: EdgeInsets.zero,
-          ),
         ],
       ),
       // 保存は常に押せる場所に置く。一覧の中に入れると、

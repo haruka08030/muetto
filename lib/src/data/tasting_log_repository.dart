@@ -16,7 +16,6 @@ class TastingLogRepository {
     required double rating,
     String? memo,
     DateTime? testedAt,
-    bool wantToBuy = false,
   }) async {
     // RLS が user_id = auth.uid() を要求する。
     // ゲストはログのタブに入れない作りだが、ここでも防いでおく。
@@ -33,7 +32,6 @@ class TastingLogRepository {
           'rating': rating,
           if (memo != null && memo.trim().isNotEmpty) 'memo': memo.trim(),
           if (testedAt != null) 'tested_at': _dateOnly(testedAt),
-          'want_to_buy': wantToBuy,
         })
         .select()
         .single();
@@ -91,7 +89,6 @@ class TastingLogRepository {
     required String logId,
     required double rating,
     required String? memo,
-    required bool wantToBuy,
   }) async {
     final trimmedMemo = memo?.trim();
 
@@ -102,7 +99,6 @@ class TastingLogRepository {
           'memo': (trimmedMemo == null || trimmedMemo.isEmpty)
               ? null
               : trimmedMemo,
-          'want_to_buy': wantToBuy,
           'updated_at': DateTime.now().toIso8601String(),
         })
         .eq('id', logId);
