@@ -84,18 +84,21 @@ flutter run \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
-### ゲスト閲覧（開発用）
+### 匿名で使う（開発用）
 
-ログインせずにカタログを見たいときは `GUEST_MODE` を有効にする。
-サインイン画面に「ログインせずに見る」が出る。
+ログインせずに全機能を触りたいときは `GUEST_MODE` を有効にする。
+サインイン画面に「ログインせずに使う」が出る。
+
+Supabase の匿名サインインを使う。実際のセッションができるので
+RLS は通常どおり効き、ログもコレクションも本番と同じ経路で動く。
+**Supabase 側で Anonymous sign-ins を有効にしておくこと**
+（Authentication → Sign In / Up → Anonymous sign-ins）。
 
 ```bash
 flutter run --dart-define=GUEST_MODE=true
 ```
 
 既定は無効で、リリースビルドには導線が出ない。
-カタログは RLS が `select using (true)` のため未ログインでも読めるが、
-試香ログなど書き込みが要る機能はゲストでは使えない。
 
 DB を用意しただけでは香水レコードが無く、検索結果が空になる。
 開発用のフィクスチャを入れる:
