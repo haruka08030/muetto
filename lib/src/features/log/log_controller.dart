@@ -45,7 +45,6 @@ class LogController extends Notifier<AsyncValue<void>> {
     required PerfumeSummary perfume,
     required double rating,
     String? memo,
-    String? method,
     bool wantToBuy = false,
   }) async {
     state = const AsyncLoading();
@@ -57,7 +56,6 @@ class LogController extends Notifier<AsyncValue<void>> {
             perfumeId: perfume.id,
             rating: rating,
             memo: memo,
-            method: method,
             wantToBuy: wantToBuy,
           );
 
@@ -97,7 +95,6 @@ class LogController extends Notifier<AsyncValue<void>> {
               brandNameJa: perfume.brandNameJa,
               rating: rating,
               memo: memo,
-              method: method,
               wantToBuy: wantToBuy,
               createdAt: DateTime.now(),
             ),
@@ -137,7 +134,6 @@ class LogController extends Notifier<AsyncValue<void>> {
     required String perfumeId,
     required double rating,
     required String? memo,
-    required String? method,
     required bool wantToBuy,
   }) async {
     state = const AsyncLoading();
@@ -148,7 +144,6 @@ class LogController extends Notifier<AsyncValue<void>> {
             logId: logId,
             rating: rating,
             memo: memo,
-            method: method,
             wantToBuy: wantToBuy,
           ),
     );

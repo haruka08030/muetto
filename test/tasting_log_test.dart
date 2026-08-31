@@ -21,26 +21,7 @@ void main() {
       });
 
       expect(log.memo, isNull);
-      expect(log.method, isNull);
       expect(log.wantToBuy, isFalse);
-    });
-  });
-
-  group('TastingMethod', () {
-    test('DB の tasting_method enum と値が一致している', () {
-      // ここがずれると保存時に 22P02 で落ちる。
-      expect(TastingMethod.values.map((m) => m.value), [
-        'blotter',
-        'skin',
-        'sample',
-        'owned',
-      ]);
-    });
-
-    test('画面に出す名前が空でない', () {
-      for (final method in TastingMethod.values) {
-        expect(method.label, isNotEmpty);
-      }
     });
   });
 }

@@ -13,7 +13,6 @@ void main() {
         brandNameJa: 'メゾン・ヒカリ',
         rating: 4.2,
         memo: '朝つけたい',
-        method: 'skin',
         wantToBuy: true,
         createdAt: DateTime.parse('2026-08-30T10:00:00.000'),
       );
@@ -23,7 +22,6 @@ void main() {
       expect(restored.id, draft.id);
       expect(restored.rating, draft.rating);
       expect(restored.memo, draft.memo);
-      expect(restored.method, draft.method);
       expect(restored.wantToBuy, isTrue);
       expect(restored.createdAt, draft.createdAt);
       // 香水名を持っているので、電波が無くても一覧に出せる。
@@ -43,7 +41,6 @@ void main() {
       final restored = LogDraft.decodeList(LogDraft.encodeList([draft])).single;
 
       expect(restored.memo, isNull);
-      expect(restored.method, isNull);
       expect(restored.perfumeNameJa, isNull);
       expect(restored.wantToBuy, isFalse);
     });

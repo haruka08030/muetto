@@ -39,10 +39,10 @@ class AddToCollectionActions extends ConsumerWidget {
   }
 
   Future<void> _addToCollection(BuildContext context, WidgetRef ref) async {
-    final result = await showModalBottomSheet<_CollectionInput>(
+    final result = await showModalBottomSheet<CollectionInput>(
       context: context,
       isScrollControlled: true,
-      builder: (context) => const _CollectionSheet(),
+      builder: (context) => const CollectionSheet(),
     );
     if (result == null) {
       return;
@@ -70,7 +70,7 @@ class AddToCollectionActions extends ConsumerWidget {
   Future<void> _addToWishlist(BuildContext context, WidgetRef ref) async {
     final priority = await showModalBottomSheet<int>(
       context: context,
-      builder: (context) => const _PrioritySheet(),
+      builder: (context) => const PrioritySheet(),
     );
     if (priority == null) {
       return;
@@ -98,21 +98,21 @@ class AddToCollectionActions extends ConsumerWidget {
   }
 }
 
-class _CollectionInput {
-  const _CollectionInput({required this.type, this.volumeMl});
+class CollectionInput {
+  const CollectionInput({required this.type, this.volumeMl});
 
   final AcquisitionType type;
   final double? volumeMl;
 }
 
-class _CollectionSheet extends StatefulWidget {
-  const _CollectionSheet();
+class CollectionSheet extends StatefulWidget {
+  const CollectionSheet({super.key});
 
   @override
-  State<_CollectionSheet> createState() => _CollectionSheetState();
+  State<CollectionSheet> createState() => _CollectionSheetState();
 }
 
-class _CollectionSheetState extends State<_CollectionSheet> {
+class _CollectionSheetState extends State<CollectionSheet> {
   AcquisitionType _type = AcquisitionType.fullBottle;
   final _volume = TextEditingController();
 
@@ -164,7 +164,7 @@ class _CollectionSheetState extends State<_CollectionSheet> {
             const SizedBox(height: AppSpacing.lg),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(
-                _CollectionInput(
+                CollectionInput(
                   type: _type,
                   volumeMl: double.tryParse(_volume.text.trim()),
                 ),
@@ -178,8 +178,8 @@ class _CollectionSheetState extends State<_CollectionSheet> {
   }
 }
 
-class _PrioritySheet extends StatelessWidget {
-  const _PrioritySheet();
+class PrioritySheet extends StatelessWidget {
+  const PrioritySheet({super.key});
 
   @override
   Widget build(BuildContext context) {

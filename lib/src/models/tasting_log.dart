@@ -8,7 +8,6 @@ class TastingLog {
     required this.rating,
     required this.testedAt,
     this.memo,
-    this.method,
     this.wantToBuy = false,
   });
 
@@ -19,7 +18,6 @@ class TastingLog {
     rating: _toDouble(json['rating']),
     memo: json['memo'] as String?,
     testedAt: DateTime.parse(json['tested_at'] as String),
-    method: json['method'] as String?,
     wantToBuy: json['want_to_buy'] as bool? ?? false,
   );
 
@@ -38,26 +36,7 @@ class TastingLog {
   final String? memo;
   final DateTime testedAt;
 
-  /// 試した方法。null は未選択。値は DB の tasting_method に合わせる。
-  final String? method;
-
   final bool wantToBuy;
-}
-
-/// 試した方法の選択肢。DB の tasting_method enum と一対一で対応する。
-enum TastingMethod {
-  blotter('blotter', 'ムエット'),
-  skin('skin', '肌につけた'),
-  sample('sample', 'サンプル'),
-  owned('owned', '手持ち');
-
-  const TastingMethod(this.value, this.label);
-
-  /// DB に保存する値。
-  final String value;
-
-  /// 画面に出す名前。
-  final String label;
 }
 
 /// 一覧に出すための、ログと香水を組にしたもの。

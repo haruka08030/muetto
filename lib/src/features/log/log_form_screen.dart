@@ -27,7 +27,6 @@ class LogFormScreen extends ConsumerStatefulWidget {
 class _LogFormScreenState extends ConsumerState<LogFormScreen> {
   late final TextEditingController _memo;
   late double _rating;
-  TastingMethod? _method;
   late bool _wantToBuy;
 
   bool get _isEditing => widget.existing != null;
@@ -39,11 +38,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
     _memo = TextEditingController(text: existing?.memo ?? '');
     _rating = existing?.rating ?? 0;
     _wantToBuy = existing?.wantToBuy ?? false;
-    _method = existing?.method == null
-        ? null
-        : TastingMethod.values
-              .where((m) => m.value == existing!.method)
-              .firstOrNull;
   }
 
   @override
@@ -66,7 +60,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
         perfumeId: widget.perfume.id,
         rating: _rating,
         memo: _memo.text,
-        method: _method?.value,
         wantToBuy: _wantToBuy,
       );
       if (updated && mounted) {
@@ -79,7 +72,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
       perfume: widget.perfume,
       rating: _rating,
       memo: _memo.text,
-      method: _method?.value,
       wantToBuy: _wantToBuy,
     );
 
@@ -139,22 +131,6 @@ class _LogFormScreenState extends ConsumerState<LogFormScreen> {
             ),
           ),
           const SizedBox(height: AppSpacing.xl),
-
-          Text('どう試したか', style: Theme.of(context).textTheme.titleSmall),
-          const SizedBox(height: AppSpacing.sm),
-          Wrap(
-            spacing: AppSpacing.sm,
-            children: [
-              for (final method in TastingMethod.values)
-                ChoiceChip(
-                  label: Text(method.label),
-                  selected: _method == method,
-                  onSelected: (selected) =>
-                      setState(() => _method = selected ? method : null),
-                ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.lg),
 
           TextField(
             controller: _memo,

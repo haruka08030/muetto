@@ -196,7 +196,7 @@ class _RecentLogs extends ConsumerWidget {
           data: (items) => items.isEmpty
               ? const _Notice(
                   icon: Icons.edit_note_outlined,
-                  text: 'まだ記録がありません\n＋ボタンから最初の一件を書けます',
+                  text: 'まだ記録がありません\n＋ボタンから追加できます',
                 )
               : Column(
                   children: [

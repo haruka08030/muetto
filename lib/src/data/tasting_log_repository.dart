@@ -15,7 +15,6 @@ class TastingLogRepository {
     required String perfumeId,
     required double rating,
     String? memo,
-    String? method,
     DateTime? testedAt,
     bool wantToBuy = false,
   }) async {
@@ -33,7 +32,6 @@ class TastingLogRepository {
           'perfume_id': perfumeId,
           'rating': rating,
           if (memo != null && memo.trim().isNotEmpty) 'memo': memo.trim(),
-          if (method != null) 'method': method,
           if (testedAt != null) 'tested_at': _dateOnly(testedAt),
           'want_to_buy': wantToBuy,
         })
@@ -87,13 +85,12 @@ class TastingLogRepository {
 
   /// ログを書き換える。RLS が自分のものだけに絞る。
   ///
-  /// memo と method は空にできる必要がある。省略と「消した」を
-  /// 区別するため、呼び出し側は必ず両方を渡す。
+  /// memo は空にできる必要がある。省略と「消した」を区別するため、
+  /// 呼び出し側は必ず渡す。
   Future<void> update({
     required String logId,
     required double rating,
     required String? memo,
-    required String? method,
     required bool wantToBuy,
   }) async {
     final trimmedMemo = memo?.trim();
@@ -105,7 +102,6 @@ class TastingLogRepository {
           'memo': (trimmedMemo == null || trimmedMemo.isEmpty)
               ? null
               : trimmedMemo,
-          'method': method,
           'want_to_buy': wantToBuy,
           'updated_at': DateTime.now().toIso8601String(),
         })

@@ -15,7 +15,6 @@ class LogDraft {
     this.brandNameEn,
     this.brandNameJa,
     this.memo,
-    this.method,
     this.wantToBuy = false,
   });
 
@@ -28,7 +27,6 @@ class LogDraft {
     brandNameJa: json['brand_name_ja'] as String?,
     rating: (json['rating'] as num).toDouble(),
     memo: json['memo'] as String?,
-    method: json['method'] as String?,
     wantToBuy: json['want_to_buy'] as bool? ?? false,
     createdAt: DateTime.parse(json['created_at'] as String),
   );
@@ -59,7 +57,6 @@ class LogDraft {
     if (brandNameJa != null) 'brand_name_ja': brandNameJa,
     'rating': rating,
     if (memo != null) 'memo': memo,
-    if (method != null) 'method': method,
     'want_to_buy': wantToBuy,
     'created_at': createdAt.toIso8601String(),
   };
@@ -78,7 +75,6 @@ class LogDraft {
 
   final double rating;
   final String? memo;
-  final String? method;
   final bool wantToBuy;
   final DateTime createdAt;
 }

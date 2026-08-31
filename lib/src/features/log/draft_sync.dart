@@ -47,7 +47,6 @@ class DraftSync extends Notifier<AsyncValue<int>> {
               perfumeId: draft.perfumeId,
               rating: draft.rating,
               memo: draft.memo,
-              method: draft.method,
               testedAt: draft.createdAt,
               wantToBuy: draft.wantToBuy,
             );

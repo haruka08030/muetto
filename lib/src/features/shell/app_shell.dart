@@ -62,7 +62,8 @@ class AppShell extends ConsumerWidget {
   }
 }
 
-/// 記録の入口。最頻出の操作（店頭での試香記録）なので最短距離に置く。
+/// 追加の入口。試した・持ってる・欲しいの三つをここにまとめる。
+/// 最頻出の操作（店頭での試香記録）なので最短距離に置く。
 class _LogButton extends StatelessWidget {
   const _LogButton({required this.onPressed});
 
@@ -72,7 +73,7 @@ class _LogButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPressed,
-      tooltip: 'ログを書く',
+      tooltip: '追加する',
       shape: const CircleBorder(),
       child: const Icon(Icons.add),
     );

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/collection_repository.dart';
 import '../../data/perfume_repository.dart';
 import '../../models/localized.dart';
 import '../../models/perfume.dart';
 import '../../theme/app_theme.dart';
+import '../collection/add_actions.dart';
+import '../collection/collection_controller.dart';
+import 'add_action_sheet.dart';
 import 'log_form_screen.dart';
 
-/// ログを書く香水を選ぶ（S-08 の入口）。
+/// 追加する香水を選ぶ（中央 FAB の行き先）。
 ///
-/// 中央 FAB から来る。ここで選んでから評価を付ける。
-/// 検索画面とは別に持つ。あちらは「調べる」、ここは「記録する対象を決める」で、
+/// 選んだあとに、試した・持ってる・欲しいのどれかを尋ねる。
+/// 検索画面とは別に持つ。あちらは「調べる」、ここは「追加する対象を決める」で、
 /// 選んだあとの行き先が違う。
 class PickPerfumeScreen extends ConsumerStatefulWidget {
   const PickPerfumeScreen({super.key});
@@ -61,28 +65,98 @@ class _PickPerfumeScreenState extends ConsumerState<PickPerfumeScreen> {
     }
   }
 
-  Future<void> _openForm(PerfumeSummary perfume) async {
+  /// 香水を選んだら、何をするかを尋ねてから進む。
+  Future<void> _pick(PerfumeSummary perfume) async {
+    final name = localizedName(nameEn: perfume.nameEn, nameJa: perfume.nameJa);
+    final action = await showAddActionSheet(context, name);
+    if (action == null || !mounted) {
+      return;
+    }
+
+    final added = switch (action) {
+      AddAction.tasted => await _openLogForm(perfume),
+      AddAction.owned => await _addToCollection(perfume),
+      AddAction.wanted => await _addToWishlist(perfume),
+    };
+
+    if (!added || !mounted) {
+      return;
+    }
+    await Navigator.of(context).maybePop();
+  }
+
+  Future<bool> _openLogForm(PerfumeSummary perfume) async {
     final saved = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
         fullscreenDialog: true,
         builder: (context) => LogFormScreen(perfume: perfume),
       ),
     );
+    return saved ?? false;
+  }
 
-    if (saved ?? false) {
-      if (!mounted) return;
-      await Navigator.of(context).maybePop();
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-        ..clearSnackBars()
-        ..showSnackBar(const SnackBar(content: Text('ログを保存しました')));
+  Future<bool> _addToCollection(PerfumeSummary perfume) async {
+    final input = await showModalBottomSheet<CollectionInput>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => const CollectionSheet(),
+    );
+    if (input == null) {
+      return false;
     }
+
+    try {
+      await ref
+          .read(collectionRepositoryProvider)
+          .addItem(
+            perfumeId: perfume.id,
+            acquisitionType: input.type,
+            volumeMl: input.volumeMl,
+          );
+      ref.invalidate(collectionItemsProvider);
+      _toast('コレクションに追加しました');
+      return true;
+    } on Object catch (error) {
+      _toast('追加できませんでした: $error');
+      return false;
+    }
+  }
+
+  Future<bool> _addToWishlist(PerfumeSummary perfume) async {
+    final priority = await showModalBottomSheet<int>(
+      context: context,
+      builder: (context) => const PrioritySheet(),
+    );
+    if (priority == null) {
+      return false;
+    }
+
+    try {
+      await ref
+          .read(collectionRepositoryProvider)
+          .addToWishlist(perfumeId: perfume.id, priority: priority);
+      ref.invalidate(wishlistProvider);
+      _toast('欲しいものに追加しました');
+      return true;
+    } on Object catch (error) {
+      _toast('追加できませんでした: $error');
+      return false;
+    }
+  }
+
+  void _toast(String message) {
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ログを書く')),
+      appBar: AppBar(title: const Text('追加する')),
       body: Column(
         children: [
           Padding(
@@ -141,7 +215,7 @@ class _PickPerfumeScreenState extends ConsumerState<PickPerfumeScreen> {
             ),
           ),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () => _openForm(perfume),
+          onTap: () => _pick(perfume),
         );
       },
     );

@@ -81,7 +81,7 @@ class LogListView extends ConsumerWidget {
         if (items.isEmpty) {
           return const _Message(
             icon: Icons.edit_note_outlined,
-            text: 'まだログがありません\n＋ボタンから最初の記録を書けます',
+            text: 'まだログがありません\n＋ボタンから追加できます',
           );
         }
 

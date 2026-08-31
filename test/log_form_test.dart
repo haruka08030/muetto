@@ -45,7 +45,6 @@ void main() {
         'perfume_id': 'p1',
         'rating': 4.2,
         'memo': '朝つけたい',
-        'method': 'skin',
         'want_to_buy': true,
         'tested_at': '2026-08-30',
       }),
@@ -57,30 +56,24 @@ void main() {
     expect(find.text('4.2'), findsOneWidget);
     expect(find.text('朝つけたい'), findsOneWidget);
 
-    final chip = tester.widget<ChoiceChip>(
-      find.widgetWithText(ChoiceChip, '肌につけた'),
-    );
-    expect(chip.selected, isTrue);
-
     final toggle = tester.widget<SwitchListTile>(find.byType(SwitchListTile));
     expect(toggle.value, isTrue);
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('未知の method が来ても落ちない', (tester) async {
-    // DB に enum が増えた場合でも編集画面を開けるようにする。
+  testWidgets('メモが無いログも編集できる', (tester) async {
     await pumpForm(
       tester,
       existing: TastingLog.fromJson({
         'id': 'l1',
         'perfume_id': 'p1',
         'rating': 3,
-        'method': 'unknown_method',
         'tested_at': '2026-08-30',
       }),
     );
 
     expect(find.text('ログを編集'), findsOneWidget);
+    expect(find.text('3.0'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
